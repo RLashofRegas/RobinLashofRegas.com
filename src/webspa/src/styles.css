@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+  }
+
+app-top-bar {
+    width: 100%;
+    height: 100px;
+    background-color: #4187ce;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  app-top-bar h1 {
+    color: white;
+    margin: 0;
+  }
