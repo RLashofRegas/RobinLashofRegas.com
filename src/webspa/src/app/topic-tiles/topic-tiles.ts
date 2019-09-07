@@ -13,4 +13,4 @@ export const tiles: TopicTile[] = [
         imgSrc: 'assets/images/recipes/recipes-tile.jpg',
         route: ''
     }
-  ]
+  ];
