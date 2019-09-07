@@ -1,7 +1,8 @@
-.container {
+.tile-container {
     position: relative;
     text-align: center;
     color: white;
+    font-size: 50px;
   }
 
   .centered {
@@ -9,8 +10,4 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-
-  mat-grid-tile {
-      font-size: 50px
   }
