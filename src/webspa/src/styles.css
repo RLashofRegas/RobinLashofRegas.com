@@ -4,7 +4,7 @@
 
 body {
     margin: 0;
-  }
+}
 
 app-top-bar {
     width: 100%;
@@ -15,9 +15,24 @@ app-top-bar {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-  }
+}
   
-  app-top-bar h1 {
-    color: white;
-    margin: 0;
-  }
+app-top-bar h1 {
+  color: white;
+  margin: 0;
+}
+
+.centered {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
