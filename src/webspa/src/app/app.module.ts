@@ -6,8 +6,10 @@ import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { TopicTilesComponent } from './topic-tiles/topic-tiles.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { TopicTileComponent } from './topic-tiles/topic-tile/topic-tile.component';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { TopicTileComponent } from './topic-tiles/topic-tile/topic-tile.componen
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
