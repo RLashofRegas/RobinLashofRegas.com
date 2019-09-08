@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { TopicTileComponent } from './topic-tiles/topic-tile/topic-tile.component';
+import { BlogPostsComponent } from './blog-posts/blog-posts.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { TopicTileComponent } from './topic-tiles/topic-tile/topic-tile.componen
     AppComponent,
     TopBarComponent,
     TopicTilesComponent,
-    TopicTileComponent
+    TopicTileComponent,
+    BlogPostsComponent
   ],
   imports: [
     BrowserModule,
