@@ -4,18 +4,6 @@ mat-card {
   color: white;
 }
 
-mat-card-title {
-  font-size: 50px;
-}
-
-mat-card:hover mat-card-title {
-  font-size: 65px;
-}
-
-mat-card:hover img {
-  opacity: 0.7;
-}
-
 img {
   display: block;
   margin-left: auto;

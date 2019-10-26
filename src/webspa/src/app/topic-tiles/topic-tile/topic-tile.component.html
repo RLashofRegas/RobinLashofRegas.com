@@ -1,4 +1,4 @@
-<mat-card class="tile-container" (mouseover)="tileHover()" (mouseout)="tileHover()"> <!-- (hover)="tileHover()"-->
-    <img mat-card-image [src]="tile.imgSrc" [@tileHover]=hoverState> <!--[@tileHover]=hoverState-->
-    <mat-card-title class="centered">{{ tile.title }}</mat-card-title>
+<mat-card class="tile-container" (mouseover)="tileHover()" (mouseout)="tileHover()" [@tileHover]=hoverState>
+    <img mat-card-image [src]="tile.imgSrc" [@imgAnimation]=hoverState>
+    <mat-card-title class="centered" [@titleAnimation]=hoverState>{{ tile.title }}</mat-card-title>
 </mat-card>
