@@ -9,6 +9,10 @@ TODO: Guide users through getting your code up and running on their own system. 
 4.	API references
 
 # Build and Test
+To build and run with docker compose:
+* From root directory run `docker-compose up -d --build`
+* Navigate to localhost:54331
+
 To build a component into docker image: 
 * From root dir run: `docker image build . -t webspa:1.0 -f src/webspa/Dockerfile`
 * To run image: `docker container run -d -p 8080:80 --name webspa webspa:1.0`
