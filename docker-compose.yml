@@ -1,6 +1,14 @@
 version: '3.7'
 
 services:
+
+  sqldb:
+    image: mariadb:latest
+    volumes:
+      - sql-data:/var/lib/mysql
+    networks:
+      - com.robinlashofregas.network
+
   webspa:
     image: webspa:1.0
     build:
@@ -8,6 +16,9 @@ services:
       dockerfile: src/webspa/Dockerfile
     networks:
       - com.robinlashofregas.network
+
+volumes:
+  sql-data:
 
 networks:
   com.robinlashofregas.network:
