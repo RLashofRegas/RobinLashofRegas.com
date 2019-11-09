@@ -10,6 +10,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { TopicTileComponent } from './topic-tiles/topic-tile/topic-tile.component';
 import { BlogPostsComponent } from './blog-posts/blog-posts.component';
+import { NewPostComponent } from './new-post/new-post.component';
+import { BlogDashboardComponent } from './blog-dashboard/blog-dashboard.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { BlogPostsComponent } from './blog-posts/blog-posts.component';
     TopBarComponent,
     TopicTilesComponent,
     TopicTileComponent,
-    BlogPostsComponent
+    BlogPostsComponent,
+    NewPostComponent,
+    BlogDashboardComponent
   ],
   imports: [
     BrowserModule,
