@@ -1,6 +1,6 @@
 using System;
 
-namespace blog
+namespace Blog
 {
     public class WeatherForecast
     {
