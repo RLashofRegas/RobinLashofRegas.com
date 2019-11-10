@@ -11,6 +11,7 @@ namespace BlogAPI.DataContext.EntityConfigurations
             builder.ToTable("Posts");
 
             builder.Property(p => p.Title)
+                .HasMaxLength(48)
                 .IsRequired();
 
             builder.Property(p => p.RawContent)

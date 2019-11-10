@@ -11,6 +11,7 @@ namespace BlogAPI.DataContext.EntityConfigurations
             builder.ToTable("Blogs");
 
             builder.Property(b => b.Name)
+                .HasMaxLength(48)
                 .IsRequired();
         }
     }
