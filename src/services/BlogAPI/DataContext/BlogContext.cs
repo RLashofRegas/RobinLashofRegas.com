@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using BlogAPI.Models;
-using BlogAPI.DataContext.EntityTypeConfigurations;
+using BlogAPI.DataContext.EntityConfigurations;
 
 namespace BlogAPI.DataContext
 {

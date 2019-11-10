@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
-using BlogAPI.DataContext.Models;
+using BlogAPI.Models;
 
 namespace BlogAPI.DataContext
 {
