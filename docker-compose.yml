@@ -8,12 +8,24 @@ services:
       - sql-data:/var/lib/mysql
     networks:
       - com.robinlashofregas.network
+  
+  blogapi:
+    image: blogapi:1.0
+    build:
+      context: .
+      dockerfile: src/services/BlogAPI/Dockerfile
+    depends_on:
+      - sqldb
+    networks:
+      - com.robinlashofregas.network
 
   webspa:
     image: webspa:1.0
     build:
       context: .
       dockerfile: src/webspa/Dockerfile
+    depends_on:
+      - blogapi
     networks:
       - com.robinlashofregas.network
 

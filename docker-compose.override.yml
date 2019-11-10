@@ -8,6 +8,14 @@ services:
       - ACCEPT_EULA=Y
     ports:
       - "5433:1433"
+  
+  blogapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionString=${BASE_CONNECTION_STRING}Database=Com.RobinLashofRegas.Services.BlogDb;
+    ports:
+      - "54330:80"
 
   webspa:
     environment:
