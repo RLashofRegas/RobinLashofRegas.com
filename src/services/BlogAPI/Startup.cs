@@ -57,18 +57,9 @@ namespace BlogAPI
     {
         public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<BlogContext>(container =>
+            services.AddDbContext<BlogContext>(options => 
             {
-                var loggerFactory = container.GetRequiredService<ILoggerFactory>();
-                ILogger<Startup> logger = loggerFactory.CreateLogger<Startup>();
-                logger.LogInformation($"Conn string: {configuration["ConnectionString"]}");
-
-                var options = new DbContextOptionsBuilder()
-                    .UseMySql(configuration["ConnectionString"])
-                    .UseLoggerFactory(loggerFactory)
-                    .Options;
-
-                return new BlogContext(options);
+                options.UseMySql(configuration["ConnectionString"]);
             });
 
             return services;

@@ -18,9 +18,6 @@ To build a component into docker image:
 * To run image: `docker container run -d -p 8080:80 --name webspa webspa:1.0`
 
 # Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+To add migration for BlogAPI:
+* From BlogAPI directory run: `dotnet ef migrations add <MIGRATION NAME> -o DataContext\Migrations`
