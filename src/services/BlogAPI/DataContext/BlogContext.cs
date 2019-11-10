@@ -7,6 +7,10 @@ namespace BlogAPI.DataContext
     public class BlogContext : DbContext
     {
         public BlogContext(DbContextOptions<BlogContext> options)
+            : this((DbContextOptions)options)
+        { }
+
+        public BlogContext(DbContextOptions options)
             : base(options)
         { }
 

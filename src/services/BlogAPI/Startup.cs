@@ -17,22 +17,19 @@ namespace BlogAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, ILoggerFactory loggerFactory)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            LoggerFactory = loggerFactory;
         }
 
         public IConfiguration Configuration { get; }
-
-        public ILoggerFactory LoggerFactory { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
-            services.AddCustomDbContext(Configuration, LoggerFactory);
+
+            services.AddCustomDbContext(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,14 +55,20 @@ namespace BlogAPI
 
     static class CustomStartupExtensions
     {
-        public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration, ILoggerFactory loggerFactory)
+        public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            ILogger<Startup> logger = loggerFactory.CreateLogger<Startup>();
-            logger.LogInformation($"Conn string: {configuration["ConnectionString"]}");
-            services.AddDbContext<BlogContext>(options =>
+            services.AddSingleton<BlogContext>(container =>
             {
-                options.UseMySql(configuration["ConnectionString"]);
-                options.UseLoggerFactory(loggerFactory);
+                var loggerFactory = container.GetRequiredService<ILoggerFactory>();
+                ILogger<Startup> logger = loggerFactory.CreateLogger<Startup>();
+                logger.LogInformation($"Conn string: {configuration["ConnectionString"]}");
+
+                var options = new DbContextOptionsBuilder()
+                    .UseMySql(configuration["ConnectionString"])
+                    .UseLoggerFactory(loggerFactory)
+                    .Options;
+
+                return new BlogContext(options);
             });
 
             return services;
