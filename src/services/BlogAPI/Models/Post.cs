@@ -1,4 +1,4 @@
-namespace BlogAPI.DataContext.Models
+namespace BlogAPI.Models
 {
     public class Post
     {

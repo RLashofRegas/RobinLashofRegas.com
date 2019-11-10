@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BlogAPI.DataContext.Models
+namespace BlogAPI.Models
 {
     public class Blog
     {
