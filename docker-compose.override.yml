@@ -21,5 +21,6 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
+      - BlogAPIUrl=http://blogapi:80/api/v1
     ports:
       - "54331:80"

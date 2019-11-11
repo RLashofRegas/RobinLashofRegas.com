@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using webspa.Options;
 
 namespace webspa
 {
@@ -26,6 +27,8 @@ namespace webspa
             {
                 configuration.RootPath = "ClientApp/dist/webspa";
             });
+
+            services.AddCustomOptions(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +66,18 @@ namespace webspa
 
                 spa.Options.SourcePath = "ClientApp";
             });
+        }
+    }
+
+    static class StartupExtensions
+    {
+        public static IServiceCollection AddCustomOptions(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddOptions();
+
+            services.Configure<AppOptions>(configuration);
+
+            return services;
         }
     }
 }
