@@ -69,7 +69,6 @@ export class TopicTileComponent implements OnInit {
 
   tileHover(): void {
     this.hoverState = this.hoverState === notHoveredState ? hoveredState : notHoveredState;
-    console.log("changed state to " + this.hoverState);
   }
 
 }
