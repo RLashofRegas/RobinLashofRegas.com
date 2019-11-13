@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using webspa.Options;
 
 namespace webspa.Controllers
@@ -7,9 +8,9 @@ namespace webspa.Controllers
     [ApiController]
     public class OptionsController : ControllerBase
     {
-        private readonly AppOptions _appOptions;
+        private readonly IOptionsMonitor<AppOptions> _appOptions;
 
-        public OptionsController(AppOptions appOptions)
+        public OptionsController(IOptionsMonitor<AppOptions> appOptions)
         {
             _appOptions = appOptions;
         }
@@ -17,7 +18,8 @@ namespace webspa.Controllers
         [HttpGet]
         public ActionResult<AppOptions> GetAppOptions()
         {
-            return _appOptions;
+            return _appOptions
+                .CurrentValue;
         }
     }
 }

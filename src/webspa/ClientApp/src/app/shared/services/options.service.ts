@@ -20,7 +20,7 @@ export class OptionsService {
 
   loadOptions(): void {
     console.log(this.window.location.origin);
-    let url = '/Options/GetAppOptions';
+    let url = '/Options';
     
     this.http.get<IAppOptions>(url).subscribe((response : IAppOptions) => {
       console.log('App Options Loaded.');
