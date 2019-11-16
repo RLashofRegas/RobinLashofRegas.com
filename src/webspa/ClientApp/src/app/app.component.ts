@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { OptionsService } from "./shared/services/options.service";
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,9 +8,8 @@ import { OptionsService } from "./shared/services/options.service";
 export class AppComponent implements OnInit {
   title = 'webspa';
 
-  constructor(private optionsService: OptionsService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.optionsService.loadOptions();
   }
 }

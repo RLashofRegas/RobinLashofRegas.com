@@ -14,6 +14,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
       - ConnectionString=${BASE_CONNECTION_STRING}Database=Com.RobinLashofRegas.Services.BlogDb;
+      - WebspaUrl=http://localhost:54331
     ports:
       - "54330:80"
 
@@ -21,6 +22,6 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - BlogAPIUrl=http://blogapi:80/api/v1
+      - BlogAPIUrl=http://localhost:54330/api/v1
     ports:
       - "54331:80"

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IAppOptions } from 'src/app/shared/models/app-options.model';
-import { OptionsService } from 'src/app/shared/services/options.service';
+
+import { BlogService } from "../blog-services/blog.service";
+import { IBlog } from "../models/blog.model";
 
 @Component({
   selector: 'app-new-post',
@@ -8,22 +9,19 @@ import { OptionsService } from 'src/app/shared/services/options.service';
   styleUrls: ['./new-post.component.css']
 })
 export class NewPostComponent implements OnInit {
-  private appOptions: IAppOptions;
+  private blogs: IBlog[];
 
-  constructor(private optionsService: OptionsService) {
-    if(this.optionsService.isReady)
-    {
-      this.appOptions = this.optionsService.appOptions;
-    }
-    else
-    {
-      this.optionsService.optionsLoaded$.subscribe(o => this.appOptions = o)
-    }
-    
-    console.log(`Set appOptions in NewPostComponent. BlogUrl is ${this.appOptions.blogAPIUrl}`);
-   }
+  constructor(private blogService: BlogService) { }
 
   ngOnInit() {
+    this.blogService
+      .getBlogs()
+      .subscribe(
+        (blogs) => {
+          this.blogs = blogs;
+          console.log(blogs);
+        }
+      );
   }
 
 }

@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BlogAPI.DataContext;
 using BlogAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogAPI.Controllers
 {
@@ -23,6 +25,12 @@ namespace BlogAPI.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetBlog), new { id = blog.BlogId }, blog);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Blog>>> GetBlogs(long id)
+        {
+            return await _context.Blogs.ToListAsync();
         }
 
         [HttpGet("{id}")]

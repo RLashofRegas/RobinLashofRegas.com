@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BlogAPI.DataContext;
+using BlogAPI.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -17,6 +18,8 @@ namespace BlogAPI
 {
     public class Startup
     {
+        private const string webSpaCorsPolicyName = "com.RobinLashofRegas.webspa.cors";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,6 +33,16 @@ namespace BlogAPI
             services.AddControllers();
 
             services.AddCustomDbContext(Configuration);
+
+            services.AddCustomOptions(Configuration);
+
+            services.AddCors(options => 
+            {
+                options.AddPolicy(webSpaCorsPolicyName, builder =>
+                {
+                    builder.WithOrigins(Configuration["WebspaUrl"]);
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +52,8 @@ namespace BlogAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(webSpaCorsPolicyName);
 
             app.UseHttpsRedirection();
 
@@ -59,8 +74,19 @@ namespace BlogAPI
         {
             services.AddDbContext<BlogContext>(options => 
             {
-                options.UseMySql(configuration["ConnectionString"]);
+                options.UseMySql(configuration["ConnectionString"], (options) => {
+                    options.EnableRetryOnFailure();
+                });
             });
+
+            return services;
+        }
+
+        public static IServiceCollection AddCustomOptions(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddOptions();
+
+            services.Configure<AppOptions>(configuration);
 
             return services;
         }
