@@ -9,6 +9,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using BlogAPI.DataContext;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using Microsoft.Extensions.Options;
+using BlogAPI.Options;
 
 namespace BlogAPI
 {
@@ -21,6 +24,13 @@ namespace BlogAPI
             using(var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
+
+                var logger1 = services.GetRequiredService<ILogger<Program>>();
+                var appOptions = services.GetRequiredService<IOptionsMonitor<AppOptions>>().CurrentValue;
+                var fileName = Path.GetRandomFileName();
+                var filePath = Path.Combine(appOptions.ImagesPath, fileName);
+                logger1.LogDebug(filePath);
+
 
                 try
                 {

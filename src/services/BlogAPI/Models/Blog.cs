@@ -6,6 +6,7 @@ namespace BlogAPI.Models
     {
         public int BlogId { get; set; }
         public string Name { get; set; }
+        public string TileImagePath { get; set; }
 
         public ICollection<Post> Posts { get; set; }
     }

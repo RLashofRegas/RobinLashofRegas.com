@@ -10,9 +10,15 @@ namespace BlogAPI.DataContext.EntityConfigurations
         {
             builder.ToTable("Blogs");
 
+            builder.HasIndex(b => b.Name)
+                .IsUnique();
+
             builder.Property(b => b.Name)
                 .HasMaxLength(48)
                 .IsRequired();
+
+            builder.Property(b => b.TileImagePath)
+                .HasMaxLength(255);
         }
     }
 }
