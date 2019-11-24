@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-new-blog',
@@ -10,7 +10,7 @@ export class NewBlogComponent implements OnInit {
   private newBlogForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) { }
-  
+
   ngOnInit() {
     this.newBlogForm = this.formBuilder.group({
       blogName: new FormControl(null),
