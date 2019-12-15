@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BlogAPI.DataContext;
-using BlogAPI.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,6 +13,11 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
+
+using BlogAPI.DataContext;
+using BlogAPI.Options;
+using BlogAPI.Providers;
+using BlogAPI.Middleware;
 
 namespace BlogAPI
 {

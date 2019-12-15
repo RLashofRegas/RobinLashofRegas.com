@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-public class RequestResponseLoggingMiddleware
+namespace BlogAPI.Middleware
 {
+  public class RequestResponseLoggingMiddleware
+  {
     private readonly RequestDelegate _next;
 
     public RequestResponseLoggingMiddleware(RequestDelegate next)
@@ -69,4 +71,5 @@ public class RequestResponseLoggingMiddleware
       //Return the string for the response, including the status code (e.g. 200, 404, 401, etc.)
       return $"statusCode: {context.Response.StatusCode}\n responseBody: {text}";
     }
+  }
 }
