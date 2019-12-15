@@ -34,4 +34,5 @@ Common MySql Commands reference: http://g2pc1.bu.edu/~qzpeng/manual/MySQL%20Comm
 # Contribute
 
 To add migration for BlogAPI:
-* From BlogAPI directory run: `dotnet ef migrations add <MIGRATION NAME> -o DataContext\Migrations`
+* Install dotnet ef CLI tool: `dotnet tool install --global dotnet-ef --version 3.0.0`
+* From BlogAPI directory run (on linux use `DataContext/Migrations`): `dotnet ef migrations add <MIGRATION NAME> -o DataContext\Migrations`
