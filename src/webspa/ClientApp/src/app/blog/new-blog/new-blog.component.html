@@ -1,17 +1,17 @@
 <form [formGroup]="newBlogForm" (ngSubmit)="onSubmit(newBlogForm.value)">
 
     <div>
-        <label for="blogName">
+        <label for="Name">
             Blog Name
         </label>
-        <input type="text" formControlName="blogName">
+        <input type="text" formControlName="Name">
     </div>
 
     <div>
-        <label for="tileImage">
+        <label for="TileImage">
             Tile Image
         </label>
-        <input type="file" formControlName="tileImage">
+        <input type="file" formControlName="TileImage">
     </div>
 
     <button type="submit">Create Blog</button>

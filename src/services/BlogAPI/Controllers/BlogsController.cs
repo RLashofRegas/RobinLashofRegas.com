@@ -6,6 +6,7 @@ using BlogAPI.Models;
 using BlogAPI.Options;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace BlogAPI.Controllers
@@ -18,15 +19,17 @@ namespace BlogAPI.Controllers
 
         private readonly BlogContext _context;
         private readonly IOptionsMonitor<AppOptions> _appOptions;
+        private readonly ILogger<BlogsController> _logger;
         
-        public BlogsController(BlogContext context, IOptionsMonitor<AppOptions> appOptions)
+        public BlogsController(BlogContext context, IOptionsMonitor<AppOptions> appOptions, ILogger<BlogsController> logger)
         {
             _context = context;
             _appOptions = appOptions;
+            _logger = logger;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Blog>> PostBlog(PostBlogModel blogModel)
+        public async Task<ActionResult<Blog>> PostBlog([FromForm]PostBlogModel blogModel)
         {
             if(await _context.Blogs.AnyAsync(b => b.Name == blogModel.Name))
             {
@@ -41,6 +44,8 @@ namespace BlogAPI.Controllers
             }
 
             string imagePath = Path.Combine(imageBasePath, Path.GetRandomFileName());
+            
+            _logger.LogDebug($"Name: {blogModel.TileImage.Name}; ContentType: {blogModel.TileImage.ContentType}; Length: {blogModel.TileImage.Length}");
 
             using(var stream = System.IO.File.Create(imagePath))
             {

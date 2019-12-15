@@ -35,4 +35,21 @@ export class BlogService {
     );
     return blogsSubject.asObservable();
   }
+
+  postBlog(blogData: FormData): Observable<any> {
+    const postBlogSubject = new Subject();
+    this.appOptions.subscribe(
+      (options) => {
+        const url = options.blogAPIUrl + '/Blogs';
+        this.http
+          .post(url, blogData)
+          .subscribe(
+            (blog) => {
+              postBlogSubject.next(blog);
+            }
+          );
+      }
+    );
+    return postBlogSubject.asObservable();
+  }
 }

@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 
 namespace BlogAPI
 {
@@ -41,7 +42,8 @@ namespace BlogAPI
             {
                 options.AddPolicy(webSpaCorsPolicyName, builder =>
                 {
-                    builder.WithOrigins(Configuration["WebspaUrl"]);
+                    builder.WithOrigins(Configuration["WebspaUrl"])
+                        .WithHeaders(HeaderNames.ContentType);
                 });
             });
         }
@@ -53,6 +55,8 @@ namespace BlogAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMiddleware<RequestResponseLoggingMiddleware>();
 
             app.UseCors(webSpaCorsPolicyName);
 
@@ -70,7 +74,8 @@ namespace BlogAPI
             app.UseStaticFiles(
                 new StaticFileOptions 
                 {
-                    FileProvider = new PhysicalFileProvider(Configuration["ImagesPath"]),
+                    FileProvider = CreateIfNotExistsPhysicalFileProviderFactory
+                        .Create(Configuration["ImagesPath"]),
                     RequestPath = "/Images"
                 }
             );
