@@ -46,7 +46,17 @@ namespace BlogAPI.Middleware
         headers += $"\tkey: {header.Key}, values: {values}\n";
       }
 
-      return $"Headers: {headers}\n type: {context.Request.ContentType}\n scheme: {context.Request.Scheme}\n host+path: {context.Request.Host}{context.Request.Path}\n queryString: {context.Request.QueryString}\n body (first 50 chars): {body.Substring(0,50)}";
+      string truncatedBody;
+      if(body.Length > 100)
+      {
+        truncatedBody = body.Substring(0,100);
+      }
+      else
+      {
+        truncatedBody = body;
+      }
+
+      return $"Headers: {headers}\n type: {context.Request.ContentType}\n scheme: {context.Request.Scheme}\n host+path: {context.Request.Host}{context.Request.Path}\n queryString: {context.Request.QueryString}\n body (first 50 chars): {truncatedBody}";
     }
 
     private async Task<string> FormatResponse(HttpContext context)
@@ -75,8 +85,19 @@ namespace BlogAPI.Middleware
         headers += $"\tkey: {header.Key}, values: {values}\n";
       }
 
+      string truncatedBody;
+      if(text.Length > 100)
+      {
+        truncatedBody = text.Substring(0,100);
+      }
+      else
+      {
+        truncatedBody = text;
+      }
+
+
       //Return the string for the response, including the status code (e.g. 200, 404, 401, etc.)
-      return $"Headers: {headers}\n statusCode: {context.Response.StatusCode}\n responseBody (first 50 chars): {text.Substring(0,50)}";
+      return $"Headers: {headers}\n statusCode: {context.Response.StatusCode}\n responseBody (first 50 chars): {truncatedBody}";
     }
   }
 }
