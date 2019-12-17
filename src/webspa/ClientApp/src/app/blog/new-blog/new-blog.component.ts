@@ -8,6 +8,7 @@ import { BlogService } from '../blog-services/blog.service';
   styleUrls: ['./new-blog.component.css']
 })
 export class NewBlogComponent implements OnInit {
+  selectedFile: File = null;
   private newBlogForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private blogService: BlogService) { }
@@ -19,10 +20,18 @@ export class NewBlogComponent implements OnInit {
     });
   }
 
-  onSubmit(blogData: FormData) {
+  onSubmit(blogData: any) {
+    const submitData: FormData = new FormData();
+    submitData.append('Name', blogData.blogName);
+    submitData.append('TileImage', this.selectedFile);
+
     console.log('new blog has been submitted.', blogData);
-    this.blogService.postBlog(blogData);
+    this.blogService.postBlog(submitData);
     this.newBlogForm.reset();
+  }
+
+  onSelectFile(selectEvent: any) {
+    this.selectedFile = <File>selectEvent.target.files[0];
   }
 
 }

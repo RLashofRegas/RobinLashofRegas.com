@@ -11,7 +11,7 @@
         <label for="tileImage">
             Tile Image
         </label>
-        <input type="file" formControlName="tileImage">
+        <input type="file" formControlName="tileImage" (change)="onSelectFile($event)">
     </div>
 
     <button type="submit">Create Blog</button>
