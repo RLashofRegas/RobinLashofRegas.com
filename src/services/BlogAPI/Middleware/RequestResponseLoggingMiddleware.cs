@@ -46,7 +46,7 @@ namespace BlogAPI.Middleware
         headers += $"\tkey: {header.Key}, values: {values}\n";
       }
 
-      return $"Headers: {headers}\n type: {context.Request.ContentType}\n scheme: {context.Request.Scheme}\n host+path: {context.Request.Host}{context.Request.Path}\n queryString: {context.Request.QueryString}\n body: {body}";
+      return $"Headers: {headers}\n type: {context.Request.ContentType}\n scheme: {context.Request.Scheme}\n host+path: {context.Request.Host}{context.Request.Path}\n queryString: {context.Request.QueryString}\n body (first 50 chars): {body.Substring(0,50)}";
     }
 
     private async Task<string> FormatResponse(HttpContext context)
@@ -68,8 +68,15 @@ namespace BlogAPI.Middleware
 
       context.Response.Body = originalBody;
 
+      var headers = "\n";
+      foreach(var header in context.Response.Headers)
+      {
+        var values = string.Join(',', header.Value.ToArray());
+        headers += $"\tkey: {header.Key}, values: {values}\n";
+      }
+
       //Return the string for the response, including the status code (e.g. 200, 404, 401, etc.)
-      return $"statusCode: {context.Response.StatusCode}\n responseBody: {text}";
+      return $"Headers: {headers}\n statusCode: {context.Response.StatusCode}\n responseBody (first 50 chars): {text.Substring(0,50)}";
     }
   }
 }
