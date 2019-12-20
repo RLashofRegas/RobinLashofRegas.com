@@ -28,8 +28,8 @@ export class BlogService {
           .get<IBlog[]>(url)
           .subscribe(
             (blogs) => {
-              for(let blog of blogs){
-                blog.TileImagePath = options.blogAPIUrl + blog.TileImagePath
+              for(const blog of blogs){
+                blog.TileImagePath = options.blogAPIUrl + blog.TileImagePath;
               }
               blogsSubject.next(blogs);
             }
