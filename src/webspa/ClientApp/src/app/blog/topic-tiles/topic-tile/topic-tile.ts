@@ -1,6 +1,5 @@
 export class TopicTile {
-    title: string;
-    description: string;
-    imgSrc: string;
-    route: string;
+
+    constructor(title: string, description: string, imgSrc: string, route: string) {
+    }
 }

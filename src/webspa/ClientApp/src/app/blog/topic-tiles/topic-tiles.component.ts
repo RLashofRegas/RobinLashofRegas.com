@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+
+import { Observable, Subject } from 'rxjs';
+import { map } from "rxjs/operators";
+
 import { tiles } from './topic-tiles';
 import { TopicTile } from './topic-tile/topic-tile';
+import { BlogService } from '../blog-services/blog.service';
 
 @Component({
   selector: 'app-topic-tiles',
@@ -9,11 +14,21 @@ import { TopicTile } from './topic-tile/topic-tile';
 })
 export class TopicTilesComponent implements OnInit {
 
-  tiles: TopicTile[] = tiles;
+  tiles: Observable<TopicTile[]>;
 
-  constructor() { }
+  constructor(private blogService: BlogService) { }
 
   ngOnInit() {
+    this.tiles = this.blogService
+      .getBlogs()
+      .pipe(
+        map(
+          blogs =>
+            blogs.map(
+              blog => new TopicTile(blog.Name, blog.Name, blog.TileImagePath, '')
+            )
+        )
+      );
   }
 
 }
