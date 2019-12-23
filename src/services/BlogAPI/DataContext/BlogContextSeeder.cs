@@ -1,11 +1,20 @@
 using System.Linq;
 using System.Threading.Tasks;
 using BlogAPI.Models;
+using BlogAPI.Options;
+using Microsoft.Extensions.Options;
 
 namespace BlogAPI.DataContext
 {
-    public class BlogContextSeed
+    public class BlogContextSeeder
     {
+        private readonly IOptionsMonitor<AppOptions> _options;
+
+        public BlogContextSeeder(IOptionsMonitor<AppOptions> options)
+        {
+            _options = options;
+        }
+
         public async Task SeedAsync(BlogContext context)
         {
             if (context.Blogs.Any())
@@ -27,8 +36,8 @@ namespace BlogAPI.DataContext
 
             var blogs = new Blog[]
             {
-                new Blog { Name="Recipes", Posts = recipePosts },
-                new Blog { Name="Adventures", Posts = adventurePosts }
+                new Blog { Name="Recipes", TileImagePath = "/SeedImages/recipes-tile.jpg", Posts = recipePosts },
+                new Blog { Name="Adventures", TileImagePath = "/SeedImages/adventures-tile.jpg", Posts = adventurePosts }
             };
 
             await context.AddRangeAsync(blogs);

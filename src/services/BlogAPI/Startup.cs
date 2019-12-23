@@ -18,6 +18,7 @@ using BlogAPI.DataContext;
 using BlogAPI.Options;
 using BlogAPI.Providers;
 using BlogAPI.Middleware;
+using System.IO;
 
 namespace BlogAPI
 {
@@ -82,6 +83,15 @@ namespace BlogAPI
                     RequestPath = "/Images",
                     ServeUnknownFileTypes = true,
                     DefaultContentType = "image/jpg"
+                }
+            );
+
+            app.UseStaticFiles(
+                new StaticFileOptions 
+                {
+                    FileProvider = CreateIfNotExistsPhysicalFileProviderFactory
+                        .Create(Path.Combine(Directory.GetCurrentDirectory(), "SeedImages")),
+                    RequestPath = "/SeedImages"
                 }
             );
         }

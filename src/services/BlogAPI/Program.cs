@@ -25,18 +25,12 @@ namespace BlogAPI
             {
                 var services = scope.ServiceProvider;
 
-                var logger1 = services.GetRequiredService<ILogger<Program>>();
-                var appOptions = services.GetRequiredService<IOptionsMonitor<AppOptions>>().CurrentValue;
-                var fileName = Path.GetRandomFileName();
-                var filePath = Path.Combine(appOptions.ImagesPath, fileName);
-                logger1.LogDebug(filePath);
-
-
                 try
                 {
+                    var appOptions = services.GetRequiredService<IOptionsMonitor<AppOptions>>();
                     var context = services.GetRequiredService<BlogContext>();
                     context.Database.Migrate();
-                    var seed = new BlogContextSeed();
+                    var seed = new BlogContextSeeder(appOptions);
                     seed.SeedAsync(context).Wait();
                 }
                 catch (Exception ex)
