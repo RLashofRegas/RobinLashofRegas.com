@@ -25,7 +25,10 @@ export class TopicTilesComponent implements OnInit {
         map(
           blogs =>
             blogs.map(
-              blog => new TopicTile(blog.Name, blog.Name, blog.TileImagePath, '')
+              blog => {
+                console.log(blog.tileImagePath);
+                return new TopicTile(blog.name, blog.name, blog.tileImagePath, '')
+              }
             )
         )
       );

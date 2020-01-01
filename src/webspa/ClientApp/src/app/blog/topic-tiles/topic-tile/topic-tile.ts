@@ -1,5 +1,5 @@
 export class TopicTile {
 
-    constructor(title: string, description: string, imgSrc: string, route: string) {
+    constructor(public title: string, public description: string, public imgSrc: string, public route: string) {
     }
 }

@@ -29,7 +29,8 @@ export class BlogService {
           .subscribe(
             (blogs) => {
               for(const blog of blogs){
-                blog.TileImagePath = options.blogAPIUrl + blog.TileImagePath;
+                console.log('Blog ' + blog.name + 'has tile image path: ' + blog.tileImagePath);
+                blog.tileImagePath = options.blogAPIUrl + blog.tileImagePath;
               }
               blogsSubject.next(blogs);
             }

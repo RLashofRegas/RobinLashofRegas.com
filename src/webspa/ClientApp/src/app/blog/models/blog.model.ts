@@ -1,5 +1,5 @@
 export interface IBlog {
-    BlogId: number;
-    Name: string;
-    TileImagePath: string;
+    blogId: number;
+    name: string;
+    tileImagePath: string;
 }

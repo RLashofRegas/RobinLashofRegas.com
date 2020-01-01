@@ -80,7 +80,7 @@ namespace BlogAPI
                 {
                     FileProvider = CreateIfNotExistsPhysicalFileProviderFactory
                         .Create(Configuration["ImagesPath"]),
-                    RequestPath = "/Images",
+                    RequestPath = "/api/v1/Images",
                     ServeUnknownFileTypes = true,
                     DefaultContentType = "image/jpg"
                 }
@@ -91,7 +91,7 @@ namespace BlogAPI
                 {
                     FileProvider = CreateIfNotExistsPhysicalFileProviderFactory
                         .Create(Path.Combine(Directory.GetCurrentDirectory(), "SeedImages")),
-                    RequestPath = "/SeedImages"
+                    RequestPath = "/api/v1/SeedImages"
                 }
             );
         }
