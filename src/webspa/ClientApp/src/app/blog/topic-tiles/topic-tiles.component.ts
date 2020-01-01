@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { tiles } from './topic-tiles';
 import { TopicTile } from './topic-tile/topic-tile';
 import { BlogService } from '../blog-services/blog.service';
 
