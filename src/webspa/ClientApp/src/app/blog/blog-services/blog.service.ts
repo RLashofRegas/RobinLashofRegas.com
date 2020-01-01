@@ -28,8 +28,7 @@ export class BlogService {
           .get<IBlog[]>(url)
           .subscribe(
             (blogs) => {
-              for(const blog of blogs){
-                console.log('Blog ' + blog.name + 'has tile image path: ' + blog.tileImagePath);
+              for (const blog of blogs) {
                 blog.tileImagePath = options.blogAPIUrl + blog.tileImagePath;
               }
               blogsSubject.next(blogs);

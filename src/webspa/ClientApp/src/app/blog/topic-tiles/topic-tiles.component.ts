@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
-import { map } from "rxjs/operators";
+import { map } from 'rxjs/operators';
 
 import { tiles } from './topic-tiles';
 import { TopicTile } from './topic-tile/topic-tile';
@@ -27,7 +27,7 @@ export class TopicTilesComponent implements OnInit {
             blogs.map(
               blog => {
                 console.log(blog.tileImagePath);
-                return new TopicTile(blog.name, blog.name, blog.tileImagePath, '')
+                return new TopicTile(blog.name, blog.name, blog.tileImagePath, '');
               }
             )
         )

@@ -68,7 +68,6 @@ export class TopicTileComponent implements OnInit {
   }
 
   tileHover(): void {
-    console.log("Tile Image imgSrc = " + this.tile.imgSrc);
     this.hoverState = this.hoverState === notHoveredState ? hoveredState : notHoveredState;
   }
 
