@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BlogAPI.DataContext;
 using BlogAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogAPI.Controllers
 {
@@ -36,6 +39,15 @@ namespace BlogAPI.Controllers
             }
 
             return post;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Post>>> GetPosts(int skip = 0, int take = 10)
+        {
+            return await _context.Posts
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
         }
     }
 }

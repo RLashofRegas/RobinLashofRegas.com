@@ -8,6 +8,7 @@ import { BlogServicesModule } from './blog-services.module';
 import { IAppOptions } from 'src/app/shared/models/app-options.model';
 import { OptionsService } from 'src/app/shared/services/options.service';
 import { IBlog } from '../models/blog.model';
+import { IPost } from '../models/post.model';
 
 @Injectable({
   providedIn: BlogServicesModule
@@ -54,5 +55,22 @@ export class BlogService {
       }
     );
     return postBlogSubject.asObservable();
+  }
+
+  getPosts(): Observable<IPost[]> {
+    const postsSubject = new Subject<IPost[]>();
+    this.appOptions.subscribe(
+      (options) => {
+        const url = options.blogAPIUrl + '/Posts';
+        this.http
+          .get<IPost[]>(url)
+          .subscribe(
+            (posts) => {
+              postsSubject.next(posts);
+            }
+          );
+      }
+    );
+    return postsSubject.asObservable();
   }
 }

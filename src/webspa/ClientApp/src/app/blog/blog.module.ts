@@ -12,6 +12,7 @@ import { TopicTileComponent } from './topic-tiles/topic-tile/topic-tile.componen
 import { TopicTilesComponent } from './topic-tiles/topic-tiles.component';
 import { NewBlogComponent } from './new-blog/new-blog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BlogPostComponent } from './blog-posts/blog-post/blog-post.component';
 
 
 
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NewPostComponent,
     BlogDashboardComponent,
     NewBlogComponent,
+    BlogPostComponent,
   ],
   imports: [
     CommonModule,
