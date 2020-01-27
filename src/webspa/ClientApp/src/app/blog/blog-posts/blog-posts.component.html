@@ -1,5 +1,6 @@
 <div>
-    <div **ngFor="let post of posts | async">
+    <div *ngFor="let post of posts | async">
         <app-blog-post [post]="post"></app-blog-post>
     </div>
 </div>
+  
