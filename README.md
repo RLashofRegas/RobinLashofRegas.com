@@ -7,8 +7,14 @@ TODO: Give a short introduction of your project. Let this section explain the ob
 
 ### Linux
 
-Install node.js and npm
-- archlinux: sudo pacman -S nodejs npm
+Install node.js and npm:
+- archlinux: `sudo pacman -S nodejs npm`
+
+Install angular:
+- `npm install -g @angular/cli`
+
+Install .NET Core:
+- archlinux: `sudo pacman -S dotnet-runtime dotnet-sdk`
 
 ## Build and Test
 To build and run with docker compose:
