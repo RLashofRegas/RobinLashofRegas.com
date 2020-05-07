@@ -16,8 +16,14 @@ Install angular:
 Install .NET Core:
 - archlinux: `sudo pacman -S dotnet-runtime dotnet-sdk`
 
+Install docker and docker-compose:
+- archlinux: `sudo pacman -S docker-compose`
+
 ## Build and Test
 To build and run with docker compose:
+* start/enable docker daemon
+* make sure the docker daemon is running: `docker info`
+
 * From root directory run `docker-compose up -d --build`
 * Navigate to localhost:5431
 
