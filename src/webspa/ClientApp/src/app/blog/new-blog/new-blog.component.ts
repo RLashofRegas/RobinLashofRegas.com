@@ -9,7 +9,7 @@ import { BlogService } from '../blog-services/blog.service';
 })
 export class NewBlogComponent implements OnInit {
   selectedFile: File = null;
-  private newBlogForm: FormGroup;
+  newBlogForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private blogService: BlogService) { }
 
