@@ -22,8 +22,8 @@ services:
   webspa:
     image: webspa:1.0
     build:
-      context: .
-      dockerfile: src/webspa/Dockerfile
+      context: src/webspa
+      dockerfile: ./Dockerfile
     depends_on:
       - blogapi
     networks:
