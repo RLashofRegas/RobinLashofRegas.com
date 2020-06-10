@@ -1,3 +1,3 @@
-export interface IAppOptions {
+export class AppOptions {
   blogAPIUrl: string;
 }

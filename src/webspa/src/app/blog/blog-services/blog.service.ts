@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 
 import { BlogServicesModule } from './blog-services.module';
-import { IAppOptions } from 'src/app/shared/models/app-options.model';
+import { AppOptions } from 'src/app/shared/models/app-options.model';
 import { OptionsService } from 'src/app/shared/services/options.service';
 import { IBlog } from '../models/blog.model';
 import { IPost } from '../models/post.model';
@@ -14,7 +14,7 @@ import { IPost } from '../models/post.model';
   providedIn: BlogServicesModule
 })
 export class BlogService {
-  private appOptions: Observable<IAppOptions>;
+  private appOptions: Observable<AppOptions>;
 
   constructor(private optionsService: OptionsService, private http: HttpClient) {
     this.appOptions = optionsService.options().pipe(shareReplay(1));
