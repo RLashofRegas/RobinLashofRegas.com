@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BlogAPI.DataContext.Migrations
@@ -7,6 +8,11 @@ namespace BlogAPI.DataContext.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            if (migrationBuilder == null)
+            {
+                throw new ArgumentNullException($"{nameof(migrationBuilder)}");
+            }
+
             migrationBuilder.CreateTable(
                 name: "Blogs",
                 columns: table => new
@@ -50,6 +56,11 @@ namespace BlogAPI.DataContext.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            if (migrationBuilder == null)
+            {
+                throw new ArgumentNullException($"{nameof(migrationBuilder)}");
+            }
+
             migrationBuilder.DropTable(
                 name: "Posts");
 

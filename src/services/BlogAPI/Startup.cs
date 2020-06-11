@@ -24,7 +24,7 @@ namespace BlogAPI
 {
     public class Startup
     {
-        private const string webSpaCorsPolicyName = "com.RobinLashofRegas.webspa.cors";
+        private const string CORS_POLICY_NAME = "com.RobinLashofRegas.webspa.cors";
 
         public Startup(IConfiguration configuration)
         {
@@ -42,9 +42,9 @@ namespace BlogAPI
 
             services.AddCustomOptions(Configuration);
 
-            services.AddCors(options => 
+            services.AddCors(options =>
             {
-                options.AddPolicy(webSpaCorsPolicyName, builder =>
+                options.AddPolicy(CORS_POLICY_NAME, builder =>
                 {
                     builder.WithOrigins(Configuration["WebspaUrl"])
                         .WithHeaders(HeaderNames.ContentType);
@@ -62,7 +62,7 @@ namespace BlogAPI
 
             app.UseMiddleware<RequestResponseLoggingMiddleware>();
 
-            app.UseCors(webSpaCorsPolicyName);
+            app.UseCors(CORS_POLICY_NAME);
 
             app.UseHttpsRedirection();
 
@@ -76,7 +76,7 @@ namespace BlogAPI
             });
 
             app.UseStaticFiles(
-                new StaticFileOptions 
+                new StaticFileOptions
                 {
                     FileProvider = CreateIfNotExistsPhysicalFileProviderFactory
                         .Create(Configuration["ImagesPath"]),
@@ -87,7 +87,7 @@ namespace BlogAPI
             );
 
             app.UseStaticFiles(
-                new StaticFileOptions 
+                new StaticFileOptions
                 {
                     FileProvider = CreateIfNotExistsPhysicalFileProviderFactory
                         .Create(Path.Combine(Directory.GetCurrentDirectory(), "SeedImages")),
@@ -101,9 +101,10 @@ namespace BlogAPI
     {
         public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<BlogContext>(options => 
+            services.AddDbContext<BlogContext>(options =>
             {
-                options.UseMySql(configuration["ConnectionString"], (options) => {
+                options.UseMySql(configuration["ConnectionString"], (options) =>
+                {
                     options.EnableRetryOnFailure();
                 });
             });

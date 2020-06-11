@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BlogAPI.DataContext.Migrations
 {
@@ -6,6 +7,11 @@ namespace BlogAPI.DataContext.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            if (migrationBuilder == null)
+            {
+                throw new ArgumentNullException($"{nameof(migrationBuilder)}");
+            }
+
             migrationBuilder.AlterColumn<string>(
                 name: "Title",
                 table: "Posts",
@@ -25,6 +31,11 @@ namespace BlogAPI.DataContext.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            if (migrationBuilder == null)
+            {
+                throw new ArgumentNullException($"{nameof(migrationBuilder)}");
+            }
+
             migrationBuilder.AlterColumn<string>(
                 name: "Title",
                 table: "Posts",

@@ -15,31 +15,22 @@ using BlogAPI.Options;
 
 namespace BlogAPI
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
 
-            using(var scope = host.Services.CreateScope())
+            using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
 
-                try
-                {
-                    var appOptions = services.GetRequiredService<IOptionsMonitor<AppOptions>>();
-                    var context = services.GetRequiredService<BlogContext>();
-                    context.Database.Migrate();
-                    var seed = new BlogContextSeeder(appOptions);
-                    seed.SeedAsync(context).Wait();
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred creating the DB");
-                }
+                var appOptions = services.GetRequiredService<IOptionsMonitor<AppOptions>>();
+                var context = services.GetRequiredService<BlogContext>();
+                context.Database.Migrate();
+                BlogContextSeeder.SeedAsync(context).Wait();
             }
-            
+
             host.Run();
         }
 
