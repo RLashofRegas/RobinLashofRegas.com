@@ -24,3 +24,6 @@ services:
       - BlogAPIUrl=http://localhost:5432/api/v1
     ports:
       - "5431:4200"
+    volumes:
+      - './src/webspa:/app'
+      - '/app/node_modules'
