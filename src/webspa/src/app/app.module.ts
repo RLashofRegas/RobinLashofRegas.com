@@ -6,7 +6,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
-import { WINDOW_PROVIDERS } from "./shared/providers/window.provider";
 
 @NgModule({
   declarations: [
@@ -18,9 +17,6 @@ import { WINDOW_PROVIDERS } from "./shared/providers/window.provider";
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule
-  ],
-  providers: [
-    WINDOW_PROVIDERS
   ],
   bootstrap: [AppComponent]
 })

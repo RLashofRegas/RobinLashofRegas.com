@@ -1,24 +1,12 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
-WORKDIR /app
-EXPOSE 80
-
 FROM node:latest as node-build
-WORKDIR /node-build/ClientApp
-COPY src/webspa/ClientApp .
+
+WORKDIR /app
+ENV PATH /app/node_modules/.bin:$PATH
+
+COPY package.json package-lock.json ./
 RUN npm install
+
+COPY . ./
 RUN npm run build
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS dotnet-build
-WORKDIR /dotnet-build
-COPY /src/webspa .
-COPY --from=node-build /node-build .
-RUN dotnet restore webspa.csproj
-
-FROM dotnet-build AS publish
-WORKDIR /dotnet-build
-RUN dotnet publish -c Release -o /app
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "webspa.dll"]
+CMD [ "ng", "serve", "--host", "0.0.0.0" ]

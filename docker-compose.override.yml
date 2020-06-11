@@ -21,8 +21,9 @@ services:
 
   webspa:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
       - BlogAPIUrl=http://localhost:5432/api/v1
     ports:
-      - "5431:80"
+      - "5431:4200"
+    volumes:
+      - './src/webspa:/app'
+      - '/app/node_modules'
