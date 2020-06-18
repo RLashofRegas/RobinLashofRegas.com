@@ -40,15 +40,15 @@ export class BlogService {
     return blogsSubject.asObservable();
   }
 
-  postBlog(blogData: FormData): Observable<any> {
-    const postBlogSubject = new Subject();
+  postBlog(blogData: FormData): Observable<IBlog> {
+    const postBlogSubject = new Subject<IBlog>();
     this.appOptions.subscribe(
       (options) => {
         const url = options.blogAPIUrl + '/Blogs';
         this.http
           .post(url, blogData)
           .subscribe(
-            (blog) => {
+            (blog: IBlog) => {
               postBlogSubject.next(blog);
             }
           );

@@ -41,11 +41,11 @@
         {
             "type": "npm",
             "script": "lint",
-            "path": "src/webspa/ClientApp/",
+            "path": "src/webspa/",
             "problemMatcher": [
                 "$eslint-stylish"
             ],
-            "label": "npm: lint - src/webspa/ClientApp",
+            "label": "npm: lint - src/webspa",
             "detail": "ng lint"
         }
     ]

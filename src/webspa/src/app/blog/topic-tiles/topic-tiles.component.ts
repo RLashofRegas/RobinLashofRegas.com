@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { TopicTile } from './topic-tile/topic-tile';
@@ -17,7 +17,7 @@ export class TopicTilesComponent implements OnInit {
 
   constructor(private blogService: BlogService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.tiles = this.blogService
       .getBlogs()
       .pipe(

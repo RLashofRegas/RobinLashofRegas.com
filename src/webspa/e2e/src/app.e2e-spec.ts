@@ -9,8 +9,8 @@ describe('workspace-project App', () => {
   });
 
   it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('webspa app is running!');
+    void page.navigateTo();
+    void expect(page.getTitleText()).toEqual('webspa app is running!');
   });
 
   afterEach(async () => {

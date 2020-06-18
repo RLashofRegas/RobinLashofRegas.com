@@ -6,7 +6,7 @@ describe('OptionsService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: OptionsService = TestBed.get(OptionsService);
-    expect(service).toBeTruthy();
+    const service: OptionsService = <OptionsService>TestBed.get(OptionsService);
+    void expect(service).toBeTruthy();
   });
 });

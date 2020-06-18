@@ -7,7 +7,7 @@ describe('NewPostComponent', () => {
   let fixture: ComponentFixture<NewPostComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       declarations: [ NewPostComponent ]
     })
     .compileComponents();
@@ -20,6 +20,6 @@ describe('NewPostComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    void expect(component).toBeTruthy();
   });
 });
