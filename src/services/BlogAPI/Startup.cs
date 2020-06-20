@@ -101,11 +101,11 @@ namespace BlogAPI
     {
         public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<BlogContext>(options =>
+            services.AddDbContext<BlogContext>(dbContextOptions =>
             {
-                options.UseMySql(configuration["ConnectionString"], (options) =>
+                dbContextOptions.UseMySql(configuration["ConnectionString"], (mySqlOptions) =>
                 {
-                    options.EnableRetryOnFailure();
+                    mySqlOptions.EnableRetryOnFailure();
                 });
             });
 

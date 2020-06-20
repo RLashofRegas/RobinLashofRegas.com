@@ -906,3 +906,6 @@ dotnet_diagnostic.CA5403.severity = error
 
 # CA9999: Analyzer version mismatch
 dotnet_diagnostic.CA9999.severity = error
+
+# IDE1006: Naming rule violation
+dotnet_diagnostic.IDE1006.severity = error
