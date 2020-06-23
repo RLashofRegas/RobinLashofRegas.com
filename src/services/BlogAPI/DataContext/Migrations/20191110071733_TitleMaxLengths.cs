@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BlogAPI.DataContext.Migrations
@@ -12,7 +13,7 @@ namespace BlogAPI.DataContext.Migrations
                 throw new ArgumentNullException($"{nameof(migrationBuilder)}");
             }
 
-            migrationBuilder.AlterColumn<string>(
+            _ = migrationBuilder.AlterColumn<string>(
                 name: "Title",
                 table: "Posts",
                 maxLength: 48,
@@ -20,7 +21,7 @@ namespace BlogAPI.DataContext.Migrations
                 oldClrType: typeof(string),
                 oldType: "longtext CHARACTER SET utf8mb4");
 
-            migrationBuilder.AlterColumn<string>(
+            _ = migrationBuilder.AlterColumn<string>(
                 name: "Name",
                 table: "Blogs",
                 maxLength: 48,
@@ -36,7 +37,7 @@ namespace BlogAPI.DataContext.Migrations
                 throw new ArgumentNullException($"{nameof(migrationBuilder)}");
             }
 
-            migrationBuilder.AlterColumn<string>(
+            _ = migrationBuilder.AlterColumn<string>(
                 name: "Title",
                 table: "Posts",
                 type: "longtext CHARACTER SET utf8mb4",
@@ -44,7 +45,7 @@ namespace BlogAPI.DataContext.Migrations
                 oldClrType: typeof(string),
                 oldMaxLength: 48);
 
-            migrationBuilder.AlterColumn<string>(
+            _ = migrationBuilder.AlterColumn<string>(
                 name: "Name",
                 table: "Blogs",
                 type: "longtext CHARACTER SET utf8mb4",

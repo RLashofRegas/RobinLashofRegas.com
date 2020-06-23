@@ -19,14 +19,14 @@ namespace BlogAPI
     {
         public static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
+            IHost host = CreateHostBuilder(args).Build();
 
-            using (var scope = host.Services.CreateScope())
+            using (IServiceScope scope = host.Services.CreateScope())
             {
-                var services = scope.ServiceProvider;
+                IServiceProvider services = scope.ServiceProvider;
 
-                var appOptions = services.GetRequiredService<IOptionsMonitor<AppOptions>>();
-                var context = services.GetRequiredService<BlogContext>();
+                IOptionsMonitor<AppOptions> appOptions = services.GetRequiredService<IOptionsMonitor<AppOptions>>();
+                BlogContext context = services.GetRequiredService<BlogContext>();
                 context.Database.Migrate();
                 BlogContextSeeder.SeedAsync(context).Wait();
             }
@@ -34,16 +34,14 @@ namespace BlogAPI
             host.Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureLogging(logging =>
-                {
-                    logging.ClearProviders();
-                    logging.AddConsole();
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureLogging(logging => {
+                    _ = logging.ClearProviders();
+                    _ = logging.AddConsole();
                 })
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                .ConfigureWebHostDefaults(webBuilder => _ = webBuilder.UseStartup<Startup>());
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BlogAPI.DataContext.Migrations
@@ -12,13 +13,13 @@ namespace BlogAPI.DataContext.Migrations
                 throw new ArgumentNullException($"{nameof(migrationBuilder)}");
             }
 
-            migrationBuilder.AddColumn<string>(
+            _ = migrationBuilder.AddColumn<string>(
                 name: "TileImagePath",
                 table: "Blogs",
                 maxLength: 255,
                 nullable: true);
 
-            migrationBuilder.CreateIndex(
+            _ = migrationBuilder.CreateIndex(
                 name: "IX_Blogs_Name",
                 table: "Blogs",
                 column: "Name",
@@ -32,11 +33,11 @@ namespace BlogAPI.DataContext.Migrations
                 throw new ArgumentNullException($"{nameof(migrationBuilder)}");
             }
 
-            migrationBuilder.DropIndex(
+            _ = migrationBuilder.DropIndex(
                 name: "IX_Blogs_Name",
                 table: "Blogs");
 
-            migrationBuilder.DropColumn(
+            _ = migrationBuilder.DropColumn(
                 name: "TileImagePath",
                 table: "Blogs");
         }

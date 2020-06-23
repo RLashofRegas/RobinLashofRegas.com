@@ -2,8 +2,11 @@ using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Primitives;
 
 namespace BlogAPI.Middleware
 {
@@ -24,13 +27,13 @@ namespace BlogAPI.Middleware
             }
 
             //First, get the incoming request
-            var request = await FormatRequest(context).ConfigureAwait(true);
+            string request = await FormatRequest(context).ConfigureAwait(true);
 
             // Log request
             logger.LogDebug($"HTTP Request: {request}");
 
             //Format the response from the server
-            var response = await FormatResponse(context).ConfigureAwait(true);
+            string response = await FormatResponse(context).ConfigureAwait(true);
 
             // Log response
             logger.LogDebug($"HTTP Response: {response}");
@@ -46,31 +49,23 @@ namespace BlogAPI.Middleware
                 body = await streamReader.ReadToEndAsync().ConfigureAwait(true);
             }
 
-            context.Request.Body.Seek(0, SeekOrigin.Begin);
+            _ = context.Request.Body.Seek(0, SeekOrigin.Begin);
 
-            var headers = "\n";
-            foreach (var header in context.Request.Headers)
+            string headers = "\n";
+            foreach (KeyValuePair<string, StringValues> header in context.Request.Headers)
             {
-                var values = string.Join(',', header.Value.ToArray());
+                string values = string.Join(',', header.Value.ToArray());
                 headers += $"\tkey: {header.Key}, values: {values}\n";
             }
 
-            string truncatedBody;
-            if (body.Length > 100)
-            {
-                truncatedBody = body.Substring(0, 100);
-            }
-            else
-            {
-                truncatedBody = body;
-            }
+            string truncatedBody = body.Length > 100 ? body.Substring(0, 100) : body;
 
             return $"Headers: {headers}\n type: {context.Request.ContentType}\n scheme: {context.Request.Scheme}\n host+path: {context.Request.Host}{context.Request.Path}\n queryString: {context.Request.QueryString}\n body (first 50 chars): {truncatedBody}";
         }
 
         private async Task<string> FormatResponse(HttpContext context)
         {
-            var originalBody = context.Response.Body;
+            Stream originalBody = context.Response.Body;
 
             string text;
             using (var memStream = new MemoryStream())
@@ -79,37 +74,28 @@ namespace BlogAPI.Middleware
 
                 await _next(context).ConfigureAwait(true);
 
-                memStream.Seek(0, SeekOrigin.Begin);
+                _ = memStream.Seek(0, SeekOrigin.Begin);
 
                 using (var streamReader = new StreamReader(memStream))
                 {
                     text = await streamReader.ReadToEndAsync().ConfigureAwait(true);
                 }
 
-                memStream.Seek(0, SeekOrigin.Begin);
+                _ = memStream.Seek(0, SeekOrigin.Begin);
 
                 await memStream.CopyToAsync(originalBody).ConfigureAwait(true);
             }
 
             context.Response.Body = originalBody;
 
-            var headers = "\n";
-            foreach (var header in context.Response.Headers)
+            string headers = "\n";
+            foreach (KeyValuePair<string, StringValues> header in context.Response.Headers)
             {
-                var values = string.Join(',', header.Value.ToArray());
+                string values = string.Join(',', header.Value.ToArray());
                 headers += $"\tkey: {header.Key}, values: {values}\n";
             }
 
-            string truncatedBody;
-            if (text.Length > 100)
-            {
-                truncatedBody = text.Substring(0, 100);
-            }
-            else
-            {
-                truncatedBody = text;
-            }
-
+            string truncatedBody = text.Length > 100 ? text.Substring(0, 100) : text;
 
             //Return the string for the response, including the status code (e.g. 200, 404, 401, etc.)
             return $"Headers: {headers}\n statusCode: {context.Response.StatusCode}\n responseBody (first 50 chars): {truncatedBody}";

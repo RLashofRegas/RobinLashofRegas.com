@@ -2,13 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using BlogAPI.DataContext;
-using BlogAPI.Models;
-using BlogAPI.Options;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+
+using BlogAPI.DataContext;
+using BlogAPI.Models;
+using BlogAPI.Options;
 
 namespace BlogAPI.Controllers
 {
@@ -43,31 +45,32 @@ namespace BlogAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var imageBasePath = Path.Combine(_appOptions.CurrentValue.ImagesPath, TILE_IMAGES_FOLDER);
+            string imageBasePath = Path.Combine(_appOptions.CurrentValue.ImagesPath, TILE_IMAGES_FOLDER);
             if (!Directory.Exists(imageBasePath))
             {
                 _ = Directory.CreateDirectory(imageBasePath);
             }
 
-            var imagePath = Path.Combine(imageBasePath, Path.GetRandomFileName());
+            string imagePath = Path.Combine(imageBasePath, Path.GetRandomFileName());
 
             _logger.LogDebug($"Name: {blogModel.TileImage.Name}; ContentType: {blogModel.TileImage.ContentType}; Length: {blogModel.TileImage.Length}");
 
-            using (var stream = System.IO.File.Create(imagePath))
+            using (FileStream stream = System.IO.File.Create(imagePath))
             {
                 await blogModel.TileImage.CopyToAsync(stream).ConfigureAwait(true);
             }
 
-            var blog = new Blog
-            {
+            var blog = new Blog {
                 Name = blogModel.Name,
                 TileImagePath = imagePath
             };
 
-            _context.Blogs.Add(blog);
+            _ = _context.Blogs.Add(blog);
             _ = await _context.SaveChangesAsync().ConfigureAwait(true);
 
-            return CreatedAtAction(nameof(GetBlog), new { id = blog.BlogId }, blog);
+            return CreatedAtAction(nameof(GetBlog), new {
+                id = blog.BlogId
+            }, blog);
         }
 
         [HttpGet]
@@ -79,9 +82,9 @@ namespace BlogAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Blog>> GetBlog(int id)
         {
-            var blog = await _context.Blogs.FindAsync(id).ConfigureAwait(true);
+            Blog blog = await _context.Blogs.FindAsync(id).ConfigureAwait(true);
 
-            return blog == null ? NotFound() : (ActionResult<Blog>)blog;
+            return blog == null ? NotFound() : (ActionResult<Blog>) blog;
         }
     }
 }

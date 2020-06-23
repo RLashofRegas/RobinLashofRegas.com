@@ -28,23 +28,20 @@ namespace BlogAPI.Controllers
                 throw new ArgumentNullException($"{nameof(post)}");
             }
 
-            _context.Posts.Add(post);
-            await _context.SaveChangesAsync().ConfigureAwait(true);
+            _ = _context.Posts.Add(post);
+            _ = await _context.SaveChangesAsync().ConfigureAwait(true);
 
-            return CreatedAtAction(nameof(GetPost), new { id = post.PostId }, post);
+            return CreatedAtAction(nameof(GetPost), new {
+                id = post.PostId
+            }, post);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Post>> GetPost(long id)
         {
-            var post = await _context.Posts.FindAsync(id).ConfigureAwait(true);
+            Post post = await _context.Posts.FindAsync(id).ConfigureAwait(true);
 
-            if (post == null)
-            {
-                return NotFound();
-            }
-
-            return post;
+            return post == null ? NotFound() : (ActionResult<Post>) post;
         }
 
         [HttpGet]

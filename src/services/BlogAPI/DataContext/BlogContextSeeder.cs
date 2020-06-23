@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+
 using BlogAPI.Models;
 
 namespace BlogAPI.DataContext
@@ -31,19 +32,17 @@ namespace BlogAPI.DataContext
                 new Post { Title="Adventure 2", RawContent="# Adventure 2", ParsedContent="<h1>Adventure 2</h1>" }
             };
 
-            var recipeBlog = new Blog
-            {
+            var recipeBlog = new Blog {
                 Name = "Recipes",
                 TileImagePath = "/SeedImages/recipes-tile.jpg"
             };
-            recipeBlog.Posts.Concat(recipePosts);
+            _ = recipeBlog.Posts.Concat(recipePosts);
 
-            var adventureBlog = new Blog
-            {
+            var adventureBlog = new Blog {
                 Name = "Adventures",
                 TileImagePath = "/SeedImages/adventures-tile.jpg"
             };
-            adventureBlog.Posts.Concat(adventurePosts);
+            _ = adventureBlog.Posts.Concat(adventurePosts);
 
             var blogs = new Blog[]
             {

@@ -14,16 +14,16 @@ namespace BlogAPI.DataContext.EntityConfigurations
                 throw new ArgumentNullException($"{nameof(builder)}");
             }
 
-            builder.ToTable("Posts");
+            _ = builder.ToTable("Posts");
 
-            builder.Property(p => p.Title)
+            _ = builder.Property(p => p.Title)
                 .HasMaxLength(48)
                 .IsRequired();
 
-            builder.Property(p => p.RawContent)
+            _ = builder.Property(p => p.RawContent)
                 .HasColumnType("TEXT");
 
-            builder.Property(p => p.ParsedContent)
+            _ = builder.Property(p => p.ParsedContent)
                 .HasColumnType("TEXT");
         }
     }

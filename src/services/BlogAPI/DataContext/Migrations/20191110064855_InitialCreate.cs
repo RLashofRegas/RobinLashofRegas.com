@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
@@ -13,23 +14,18 @@ namespace BlogAPI.DataContext.Migrations
                 throw new ArgumentNullException($"{nameof(migrationBuilder)}");
             }
 
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "Blogs",
-                columns: table => new
-                {
+                columns: table => new {
                     BlogId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Blogs", x => x.BlogId);
-                });
+                constraints: table => table.PrimaryKey("PK_Blogs", x => x.BlogId));
 
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "Posts",
-                columns: table => new
-                {
+                columns: table => new {
                     PostId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     BlogId = table.Column<int>(nullable: false),
@@ -37,10 +33,9 @@ namespace BlogAPI.DataContext.Migrations
                     RawContent = table.Column<string>(type: "TEXT", nullable: true),
                     ParsedContent = table.Column<string>(type: "TEXT", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Posts", x => x.PostId);
-                    table.ForeignKey(
+                constraints: table => {
+                    _ = table.PrimaryKey("PK_Posts", x => x.PostId);
+                    _ = table.ForeignKey(
                         name: "FK_Posts_Blogs_BlogId",
                         column: x => x.BlogId,
                         principalTable: "Blogs",
@@ -48,7 +43,7 @@ namespace BlogAPI.DataContext.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
+            _ = migrationBuilder.CreateIndex(
                 name: "IX_Posts_BlogId",
                 table: "Posts",
                 column: "BlogId");
@@ -61,10 +56,10 @@ namespace BlogAPI.DataContext.Migrations
                 throw new ArgumentNullException($"{nameof(migrationBuilder)}");
             }
 
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "Posts");
 
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "Blogs");
         }
     }
