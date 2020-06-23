@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TopicTile } from './topic-tile';
 import {
   trigger,
@@ -57,15 +57,10 @@ const fadeOutTime = 100; // in ms
     ])
   ]
 })
-export class TopicTileComponent implements OnInit {
+export class TopicTileComponent {
 
   @Input() tile: TopicTile;
   hoverState: string = notHoveredState;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   tileHover(): void {
     this.hoverState = this.hoverState === notHoveredState ? hoveredState : notHoveredState;

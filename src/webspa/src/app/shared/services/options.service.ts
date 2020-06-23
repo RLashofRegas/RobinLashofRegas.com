@@ -1,5 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 
@@ -11,10 +10,8 @@ import { environment } from './../../../environments/environment'
 })
 export class OptionsService {
 
-  constructor() { }
-
   options(): Observable<AppOptions> {
-    let opts: AppOptions = { blogAPIUrl: environment.blogAPIUrl }
+    const opts: AppOptions = { blogAPIUrl: environment.blogAPIUrl }
     return of(opts)
   }
 }

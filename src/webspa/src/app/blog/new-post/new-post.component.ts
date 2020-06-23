@@ -13,7 +13,7 @@ export class NewPostComponent implements OnInit {
 
   constructor(private blogService: BlogService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.blogService
       .getBlogs()
       .subscribe(

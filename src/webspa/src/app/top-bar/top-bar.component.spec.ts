@@ -7,7 +7,7 @@ describe('TopBarComponent', () => {
   let fixture: ComponentFixture<TopBarComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       declarations: [ TopBarComponent ]
     })
     .compileComponents();
@@ -20,6 +20,6 @@ describe('TopBarComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    void expect(component).toBeTruthy();
   });
 });

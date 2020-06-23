@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using BlogAPI.Models;
 using BlogAPI.DataContext.EntityConfigurations;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace BlogAPI.DataContext
 {
@@ -9,7 +10,7 @@ namespace BlogAPI.DataContext
     {
         public BlogContext(DbContextOptions<BlogContext> options, ILoggerFactory loggerFactory)
             : base(options)
-        { 
+        {
             LoggerFactory = loggerFactory;
         }
 
@@ -20,14 +21,24 @@ namespace BlogAPI.DataContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLoggerFactory(LoggerFactory);
+            if (optionsBuilder == null)
+            {
+                throw new ArgumentNullException($"{nameof(optionsBuilder)}");
+            }
+
+            _ = optionsBuilder.UseLoggerFactory(LoggerFactory);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new BlogEntityConfiguration());
+            if (modelBuilder == null)
+            {
+                throw new ArgumentNullException($"{nameof(modelBuilder)}");
+            }
 
-            modelBuilder.ApplyConfiguration(new PostEntityConfiguration());
+            _ = modelBuilder
+                .ApplyConfiguration(new BlogEntityConfiguration())
+                .ApplyConfiguration(new PostEntityConfiguration());
         }
     }
 }

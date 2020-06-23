@@ -13,15 +13,17 @@ export class NewBlogComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private blogService: BlogService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.newBlogForm = this.formBuilder.group({
       blogName: new FormControl(null),
       tileImage: new FormControl(null)
     });
   }
 
-  onSubmit(blogData: any) {
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
+  onSubmit(blogData: any): void {
     const submitData: FormData = new FormData();
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     submitData.append('Name', blogData.blogName);
     submitData.append('TileImage', this.selectedFile);
 
@@ -30,8 +32,8 @@ export class NewBlogComponent implements OnInit {
     this.newBlogForm.reset();
   }
 
-  onSelectFile(selectEvent: any) {
-    this.selectedFile = <File>selectEvent.target.files[0];
+  onSelectFile(selectEvent: Event): void {
+    this.selectedFile = (selectEvent.target as HTMLInputElement).files[0];
   }
 
 }

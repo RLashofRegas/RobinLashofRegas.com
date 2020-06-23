@@ -7,7 +7,7 @@ describe('BlogDashboardComponent', () => {
   let fixture: ComponentFixture<BlogDashboardComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       declarations: [ BlogDashboardComponent ]
     })
     .compileComponents();
@@ -20,6 +20,6 @@ describe('BlogDashboardComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    void expect(component).toBeTruthy();
   });
 });

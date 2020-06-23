@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
       ],
@@ -16,20 +16,25 @@ describe('AppComponent', () => {
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+    void expect(app).toBeTruthy();
   });
 
   it(`should have as title 'webspa'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('webspa');
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    void expect(app.title).toEqual('webspa');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('webspa app is running!');
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+    void expect(compiled.querySelector('.content span').textContent).toContain('webspa app is running!');
   });
 });

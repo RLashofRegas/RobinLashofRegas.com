@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using BlogAPI.Models;
+using System;
 
 namespace BlogAPI.DataContext.EntityConfigurations
 {
@@ -8,16 +9,21 @@ namespace BlogAPI.DataContext.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Post> builder)
         {
-            builder.ToTable("Posts");
+            if (builder == null)
+            {
+                throw new ArgumentNullException($"{nameof(builder)}");
+            }
 
-            builder.Property(p => p.Title)
+            _ = builder.ToTable("Posts");
+
+            _ = builder.Property(p => p.Title)
                 .HasMaxLength(48)
                 .IsRequired();
 
-            builder.Property(p => p.RawContent)
+            _ = builder.Property(p => p.RawContent)
                 .HasColumnType("TEXT");
 
-            builder.Property(p => p.ParsedContent)
+            _ = builder.Property(p => p.ParsedContent)
                 .HasColumnType("TEXT");
         }
     }

@@ -1,48 +1,58 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
+
 using BlogAPI.Models;
-using BlogAPI.Options;
-using Microsoft.Extensions.Options;
 
 namespace BlogAPI.DataContext
 {
-    public class BlogContextSeeder
+    public static class BlogContextSeeder
     {
-        private readonly IOptionsMonitor<AppOptions> _options;
-
-        public BlogContextSeeder(IOptionsMonitor<AppOptions> options)
+        public static async Task SeedAsync(BlogContext context)
         {
-            _options = options;
-        }
+            if (context == null)
+            {
+                throw new ArgumentNullException($"{nameof(context)}");
+            }
 
-        public async Task SeedAsync(BlogContext context)
-        {
             if (context.Blogs.Any())
             {
                 return;
             }
 
-            var recipePosts = new Post[] 
+            var recipePosts = new Post[]
             {
                 new Post { Title="Recipe 1", RawContent="# Recipe 1", ParsedContent="<h1>Recipe 1</h1>" },
                 new Post { Title="Recipe 2", RawContent="# Recipe 2", ParsedContent="<h1>Recipe 2</h1>" }
             };
 
-            var adventurePosts = new Post[] 
+            var adventurePosts = new Post[]
             {
                 new Post { Title="Adventure 1", RawContent="# Adventure 1", ParsedContent="<h1>Adventure 1</h1>" },
                 new Post { Title="Adventure 2", RawContent="# Adventure 2", ParsedContent="<h1>Adventure 2</h1>" }
             };
 
+            var recipeBlog = new Blog {
+                Name = "Recipes",
+                TileImagePath = "/SeedImages/recipes-tile.jpg"
+            };
+            _ = recipeBlog.Posts.Concat(recipePosts);
+
+            var adventureBlog = new Blog {
+                Name = "Adventures",
+                TileImagePath = "/SeedImages/adventures-tile.jpg"
+            };
+            _ = adventureBlog.Posts.Concat(adventurePosts);
+
             var blogs = new Blog[]
             {
-                new Blog { Name="Recipes", TileImagePath = "/SeedImages/recipes-tile.jpg", Posts = recipePosts },
-                new Blog { Name="Adventures", TileImagePath = "/SeedImages/adventures-tile.jpg", Posts = adventurePosts }
+                recipeBlog,
+                adventureBlog
             };
 
-            await context.AddRangeAsync(blogs);
+            await context.AddRangeAsync(blogs).ConfigureAwait(true);
 
-            await context.SaveChangesAsync();
+            _ = await context.SaveChangesAsync().ConfigureAwait(true);
         }
     }
 }
