@@ -239,6 +239,12 @@ csharp_preserve_single_line_blocks = true
 # using directives
 csharp_using_directive_placement = outside_namespace
 
+######################
+# Naming Conventions #
+######################
+
+
+
 ###################
 # FxCop Analyzers #
 ###################
