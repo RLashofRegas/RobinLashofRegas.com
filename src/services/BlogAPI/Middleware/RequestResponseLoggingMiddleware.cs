@@ -44,7 +44,7 @@ namespace BlogAPI.Middleware
             context.Request.EnableBuffering();
 
             string body;
-            using (var streamReader = new StreamReader(context.Request.Body))
+            using (var streamReader = new StreamReader(context.Request.Body, leaveOpen: true))
             {
                 body = await streamReader.ReadToEndAsync().ConfigureAwait(true);
             }
@@ -76,7 +76,7 @@ namespace BlogAPI.Middleware
 
                 _ = memStream.Seek(0, SeekOrigin.Begin);
 
-                using (var streamReader = new StreamReader(memStream))
+                using (var streamReader = new StreamReader(memStream, leaveOpen: true))
                 {
                     text = await streamReader.ReadToEndAsync().ConfigureAwait(true);
                 }
