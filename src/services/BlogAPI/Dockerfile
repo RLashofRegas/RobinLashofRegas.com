@@ -4,6 +4,7 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS dotnet-build
 WORKDIR /build
+COPY /nuget.config /
 COPY /src/services/BlogAPI .
 RUN dotnet restore BlogAPI.csproj
 RUN dotnet build BlogAPI.csproj -c Release -o /app
