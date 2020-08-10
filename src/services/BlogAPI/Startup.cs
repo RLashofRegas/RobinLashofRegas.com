@@ -1,16 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using BlogAPI.Providers;
 using BlogAPI.Middleware;
@@ -20,11 +12,11 @@ namespace BlogAPI
 {
     public class Startup
     {
-        private const string CORS_POLICY_NAME = "com.RobinLashofRegas.webspa.cors";
+        private const string CorsPolicyName = "com.RobinLashofRegas.webspa.cors";
 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -34,15 +26,15 @@ namespace BlogAPI
         {
             _ = services.AddControllers();
 
-            _ = services.AddCustomDbContext(Configuration);
+            _ = services.AddCustomDbContext(this.Configuration);
 
-            _ = services.AddCustomOptions(Configuration);
+            _ = services.AddCustomOptions(this.Configuration);
 
             _ = services.AddCors(
                 options => options
-                    .AddPolicy(CORS_POLICY_NAME,
+                    .AddPolicy(CorsPolicyName,
                         builder => _ = builder
-                            .WithOrigins(Configuration["WebspaUrl"])
+                            .WithOrigins(this.Configuration["WebspaUrl"])
                             .WithHeaders(HeaderNames.ContentType)));
         }
 
@@ -56,7 +48,7 @@ namespace BlogAPI
 
             _ = app.UseMiddleware<RequestResponseLoggingMiddleware>();
 
-            _ = app.UseCors(CORS_POLICY_NAME);
+            _ = app.UseCors(CorsPolicyName);
 
             _ = app.UseHttpsRedirection();
 
@@ -69,7 +61,7 @@ namespace BlogAPI
             _ = app.UseStaticFiles(
                 new StaticFileOptions {
                     FileProvider = CreateIfNotExistsPhysicalFileProviderFactory
-                        .Create(Configuration["ImagesPath"]),
+                        .Create(this.Configuration["ImagesPath"]),
                     RequestPath = "/api/v1/Images",
                     ServeUnknownFileTypes = true,
                     DefaultContentType = "image/jpg"

@@ -13,11 +13,11 @@ namespace BlogAPI.Controllers
     [ApiController]
     public class PostsController : ControllerBase
     {
-        private readonly BlogContext _context;
+        private readonly BlogContext context;
 
         public PostsController(BlogContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         [HttpPost]
@@ -28,10 +28,10 @@ namespace BlogAPI.Controllers
                 throw new ArgumentNullException($"{nameof(post)}");
             }
 
-            _ = _context.Posts.Add(post);
-            _ = await _context.SaveChangesAsync().ConfigureAwait(true);
+            _ = this.context.Posts.Add(post);
+            _ = await this.context.SaveChangesAsync().ConfigureAwait(true);
 
-            return CreatedAtAction(nameof(GetPost), new {
+            return this.CreatedAtAction(nameof(GetPost), new {
                 id = post.PostId
             }, post);
         }
@@ -39,15 +39,15 @@ namespace BlogAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Post>> GetPost(long id)
         {
-            Post post = await _context.Posts.FindAsync(id).ConfigureAwait(true);
+            Post post = await this.context.Posts.FindAsync(id).ConfigureAwait(true);
 
-            return post == null ? NotFound() : (ActionResult<Post>) post;
+            return post == null ? this.NotFound() : (ActionResult<Post>) post;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Post>>> GetPosts(int skip = 0, int take = 10)
         {
-            return await _context.Posts
+            return await this.context.Posts
                 .Skip(skip)
                 .Take(take)
                 .ToListAsync()

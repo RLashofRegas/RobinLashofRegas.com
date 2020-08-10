@@ -18,17 +18,17 @@ namespace BlogAPI.Controllers
     [ApiController]
     public class BlogsController : ControllerBase
     {
-        private const string TILE_IMAGES_FOLDER = "blogTileImages";
+        private const string TileImagesFolder = "blogTileImages";
 
-        private readonly BlogContext _context;
-        private readonly IOptionsMonitor<AppOptions> _appOptions;
-        private readonly ILogger<BlogsController> _logger;
+        private readonly BlogContext context;
+        private readonly IOptionsMonitor<AppOptions> appOptions;
+        private readonly ILogger<BlogsController> logger;
 
         public BlogsController(BlogContext context, IOptionsMonitor<AppOptions> appOptions, ILogger<BlogsController> logger)
         {
-            _context = context;
-            _appOptions = appOptions;
-            _logger = logger;
+            this.context = context;
+            this.appOptions = appOptions;
+            this.logger = logger;
         }
 
         [HttpPost]
@@ -39,13 +39,13 @@ namespace BlogAPI.Controllers
                 throw new ArgumentNullException($"{nameof(blogModel)}");
             }
 
-            if (await _context.Blogs.AnyAsync(b => b.Name == blogModel.Name).ConfigureAwait(true))
+            if (await this.context.Blogs.AnyAsync(b => b.Name == blogModel.Name).ConfigureAwait(true))
             {
-                ModelState.AddModelError("Name", "A blog with that name already exists, please choose a different name.");
-                return BadRequest(ModelState);
+                this.ModelState.AddModelError("Name", "A blog with that name already exists, please choose a different name.");
+                return this.BadRequest(this.ModelState);
             }
 
-            string imageBasePath = Path.Combine(_appOptions.CurrentValue.ImagesPath, TILE_IMAGES_FOLDER);
+            string imageBasePath = Path.Combine(this.appOptions.CurrentValue.ImagesPath, TileImagesFolder);
             if (!Directory.Exists(imageBasePath))
             {
                 _ = Directory.CreateDirectory(imageBasePath);
@@ -53,7 +53,7 @@ namespace BlogAPI.Controllers
 
             string imagePath = Path.Combine(imageBasePath, Path.GetRandomFileName());
 
-            _logger.LogDebug($"Name: {blogModel.TileImage.Name}; ContentType: {blogModel.TileImage.ContentType}; Length: {blogModel.TileImage.Length}");
+            this.logger.LogDebug($"Name: {blogModel.TileImage.Name}; ContentType: {blogModel.TileImage.ContentType}; Length: {blogModel.TileImage.Length}");
 
             using (FileStream stream = System.IO.File.Create(imagePath))
             {
@@ -65,10 +65,10 @@ namespace BlogAPI.Controllers
                 TileImagePath = imagePath
             };
 
-            _ = _context.Blogs.Add(blog);
-            _ = await _context.SaveChangesAsync().ConfigureAwait(true);
+            _ = this.context.Blogs.Add(blog);
+            _ = await this.context.SaveChangesAsync().ConfigureAwait(true);
 
-            return CreatedAtAction(nameof(GetBlog), new {
+            return this.CreatedAtAction(nameof(GetBlog), new {
                 id = blog.BlogId
             }, blog);
         }
@@ -76,15 +76,15 @@ namespace BlogAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Blog>>> GetBlogs()
         {
-            return await _context.Blogs.ToListAsync().ConfigureAwait(true);
+            return await this.context.Blogs.ToListAsync().ConfigureAwait(true);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Blog>> GetBlog(int id)
         {
-            Blog blog = await _context.Blogs.FindAsync(id).ConfigureAwait(true);
+            Blog blog = await this.context.Blogs.FindAsync(id).ConfigureAwait(true);
 
-            return blog == null ? NotFound() : (ActionResult<Blog>) blog;
+            return blog == null ? this.NotFound() : (ActionResult<Blog>) blog;
         }
     }
 }
