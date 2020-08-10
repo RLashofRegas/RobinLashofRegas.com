@@ -12,11 +12,11 @@ namespace BlogAPI.Middleware
 {
     public class RequestResponseLoggingMiddleware
     {
-        private readonly RequestDelegate _next;
+        private readonly RequestDelegate next;
 
         public RequestResponseLoggingMiddleware(RequestDelegate next)
         {
-            _next = next;
+            this.next = next;
         }
 
         public async Task InvokeAsync(HttpContext context, ILogger<RequestResponseLoggingMiddleware> logger)
@@ -33,7 +33,7 @@ namespace BlogAPI.Middleware
             logger.LogDebug($"HTTP Request: {request}");
 
             //Format the response from the server
-            string response = await FormatResponse(context).ConfigureAwait(true);
+            string response = await this.FormatResponse(context).ConfigureAwait(true);
 
             // Log response
             logger.LogDebug($"HTTP Response: {response}");
@@ -72,7 +72,7 @@ namespace BlogAPI.Middleware
             {
                 context.Response.Body = memStream;
 
-                await _next(context).ConfigureAwait(true);
+                await this.next(context).ConfigureAwait(true);
 
                 _ = memStream.Seek(0, SeekOrigin.Begin);
 

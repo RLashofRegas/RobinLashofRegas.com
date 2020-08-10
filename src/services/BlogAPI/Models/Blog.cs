@@ -7,7 +7,7 @@ namespace BlogAPI.Models
     {
         public Blog()
         {
-            Posts = new Collection<Post>();
+            this.Posts = new Collection<Post>();
         }
 
         public int BlogId { get; set; }

@@ -11,7 +11,7 @@ namespace BlogAPI.DataContext
         public BlogContext(DbContextOptions<BlogContext> options, ILoggerFactory loggerFactory)
             : base(options)
         {
-            LoggerFactory = loggerFactory;
+            this.LoggerFactory = loggerFactory;
         }
 
         private ILoggerFactory LoggerFactory { get; }
@@ -26,7 +26,7 @@ namespace BlogAPI.DataContext
                 throw new ArgumentNullException($"{nameof(optionsBuilder)}");
             }
 
-            _ = optionsBuilder.UseLoggerFactory(LoggerFactory);
+            _ = optionsBuilder.UseLoggerFactory(this.LoggerFactory);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
