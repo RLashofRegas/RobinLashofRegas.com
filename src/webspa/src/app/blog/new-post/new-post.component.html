@@ -1,1 +1,16 @@
-<p>new-post works!</p>
+<form [formGroup]="newPostForm" (ngSubmit)="onSubmit(newPostForm.value)">
+
+    <div>
+        <mat-form-field>
+            <mat-label for="blogId">Blog</mat-label>
+            <mat-select formControlName="blogId">
+                <mat-option *ngFor="let blog of blogs" [value]="blog.blogId">
+                    {{blog.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <button type="submit">Add Post</button>
+
+</form>

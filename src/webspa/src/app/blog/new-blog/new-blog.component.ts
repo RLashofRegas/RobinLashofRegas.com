@@ -27,7 +27,6 @@ export class NewBlogComponent implements OnInit {
     submitData.append('Name', blogData.blogName);
     submitData.append('TileImage', this.selectedFile);
 
-    console.log('new blog has been submitted.', blogData);
     this.blogService.postBlog(submitData);
     this.newBlogForm.reset();
   }

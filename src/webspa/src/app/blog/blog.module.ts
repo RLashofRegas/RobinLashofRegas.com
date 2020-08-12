@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 import { BlogRoutingModule } from './blog-routing.module';
 import { BlogServicesModule } from './blog-services/blog-services.module';
@@ -34,6 +36,8 @@ import { BlogPostComponent } from './blog-posts/blog-post/blog-post.component';
     BlogServicesModule,
     FormsModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   exports: []
 })
