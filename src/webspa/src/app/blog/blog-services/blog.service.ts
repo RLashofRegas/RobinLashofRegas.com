@@ -74,7 +74,7 @@ export class BlogService {
     return postsSubject.asObservable();
   }
 
-  addPost(postData: FormData): Observable<IPost> {
+  addPost(postData: IPost): Observable<IPost> {
     const addPostSubject = new Subject<IPost>();
     this.appOptions.subscribe(
       (options) => {

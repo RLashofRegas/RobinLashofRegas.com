@@ -34,9 +34,7 @@ export class NewPostComponent implements OnInit {
   }
 
   onSubmit(formData: IPost): void {
-    console.log(formData)
-
-    // this.blogService.addPost(submitData);
+    this.blogService.addPost(formData);
     this.newPostForm.reset();
   }
 

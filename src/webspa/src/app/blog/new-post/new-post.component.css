@@ -1,0 +1,22 @@
+form {
+  width: 80%;
+  margin: 0 auto;
+}
+
+table {
+    width: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+button {
+    margin-left: 45%;
+    margin-right: 45%;
+    width: 10%;
+}
+
+textarea {
+    height: 500px;
+}
