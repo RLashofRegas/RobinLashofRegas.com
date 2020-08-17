@@ -2,6 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from "@angular/material/input";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from "@angular/material/button";
 
 import { BlogRoutingModule } from './blog-routing.module';
 import { BlogServicesModule } from './blog-services/blog-services.module';
@@ -11,7 +16,6 @@ import { BlogDashboardComponent } from './blog-dashboard/blog-dashboard.componen
 import { TopicTileComponent } from './topic-tiles/topic-tile/topic-tile.component';
 import { TopicTilesComponent } from './topic-tiles/topic-tiles.component';
 import { NewBlogComponent } from './new-blog/new-blog.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BlogPostComponent } from './blog-posts/blog-post/blog-post.component';
 
 
@@ -34,6 +38,10 @@ import { BlogPostComponent } from './blog-posts/blog-post/blog-post.component';
     BlogServicesModule,
     FormsModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule
   ],
   exports: []
 })

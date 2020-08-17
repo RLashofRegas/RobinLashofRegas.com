@@ -1,1 +1,43 @@
-<p>new-post works!</p>
+<form [formGroup]="newPostForm">
+
+    <div class="centered-input">
+        <mat-form-field appearance="fill">
+            <mat-label>Blog</mat-label>
+            <mat-select formControlName="blogId">
+                <mat-option *ngFor="let blog of blogs" [value]="blog.blogId">
+                    {{blog.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="centered-input">
+        <mat-form-field appearance="fill">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title">
+        </mat-form-field>
+    </div>
+
+    <table cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field appearance="fill">
+                    <mat-label>Post (Markdown)</mat-label>
+                    <textarea matInput formControlName="rawContent"></textarea>
+                </mat-form-field>
+            </td>
+
+            <td>
+                <mat-form-field appearance="fill">
+                    <mat-label>Post (HTML)</mat-label>
+                    <textarea matInput formControlName="parsedContent"></textarea>
+                </mat-form-field>
+            </td>
+        </tr>
+    </table>
+
+    <div>
+        <button mat-raised-button (click)="onSubmit(newPostForm.value)" type="button">Add Post</button>
+    </div>
+
+</form>

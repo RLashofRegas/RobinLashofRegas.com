@@ -73,4 +73,21 @@ export class BlogService {
     );
     return postsSubject.asObservable();
   }
+
+  addPost(postData: IPost): Observable<IPost> {
+    const addPostSubject = new Subject<IPost>();
+    this.appOptions.subscribe(
+      (options) => {
+        const url = options.blogAPIUrl + '/Posts';
+        this.http
+          .post(url, postData)
+          .subscribe(
+            (post: IPost) => {
+              addPostSubject.next(post);
+            }
+          );
+      }
+    );
+    return addPostSubject.asObservable();
+  }
 }
