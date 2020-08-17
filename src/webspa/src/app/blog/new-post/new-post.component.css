@@ -1,13 +1,13 @@
 form {
-  width: 80%;
-  margin: 0 auto;
-}
-
-table {
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
 }
 
 mat-form-field {
+    width: 100%;
+}
+
+table {
     width: 100%;
 }
 
@@ -19,4 +19,10 @@ button {
 
 textarea {
     height: 500px;
+}
+
+.centered-input {
+    margin-left: 35%;
+    margin-right: 35%;
+    width: 30%;
 }

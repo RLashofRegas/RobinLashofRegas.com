@@ -1,26 +1,22 @@
 <form [formGroup]="newPostForm">
 
-    <table cellspacing="0">
-        <tr>
-            <td>
-                <mat-form-field appearance="fill">
-                    <mat-label>Blog</mat-label>
-                    <mat-select formControlName="blogId">
-                        <mat-option *ngFor="let blog of blogs" [value]="blog.blogId">
-                            {{blog.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </td>
+    <div class="centered-input">
+        <mat-form-field appearance="fill">
+            <mat-label>Blog</mat-label>
+            <mat-select formControlName="blogId">
+                <mat-option *ngFor="let blog of blogs" [value]="blog.blogId">
+                    {{blog.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
 
-            <td>
-                <mat-form-field appearance="fill">
-                    <mat-label>Title</mat-label>
-                    <input matInput formControlName="title">
-                </mat-form-field>
-            </td>
-        </tr>
-    </table>
+    <div class="centered-input">
+        <mat-form-field appearance="fill">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title">
+        </mat-form-field>
+    </div>
 
     <table cellspacing="0">
         <tr>
