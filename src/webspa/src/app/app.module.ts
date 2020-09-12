@@ -4,6 +4,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
+import { AngularMaterialModule } from "./angular-material/angular-material.module";
+
+
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 
@@ -16,7 +19,8 @@ import { TopBarComponent } from './top-bar/top-bar.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularMaterialModule
   ],
   bootstrap: [AppComponent]
 })
