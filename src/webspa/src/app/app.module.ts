@@ -8,12 +8,12 @@ import { AngularMaterialModule } from "./angular-material/angular-material.modul
 
 
 import { AppComponent } from './app.component';
-import { TopBarComponent } from './top-bar/top-bar.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopBarComponent
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
