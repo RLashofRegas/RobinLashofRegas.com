@@ -1,10 +1,10 @@
-<mat-sidenav-container hasBackdrop="true">
-    <mat-toolbar>
+<div class="navigation-container">
+    <mat-toolbar color="primary">
         <button mat-icon-button color="accent" aria-label="Navigation menu" (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
         <span class="spacer"></span>
-        <span color="accent">Robin's Blog</span>
+        <h1 color="accent">Robin's Blog</h1>
         <span class="spacer"></span>
         <button mat-icon-button color="accent" aria-label="Like this blog">
             <mat-icon>favorite</mat-icon>
@@ -14,24 +14,29 @@
         </button>
     </mat-toolbar>
 
-    <mat-sidenav #sidenav mode="over">
-        <mat-nav-list>
-            <a mat-list-item class="nav-item" routerLink="/" routerLinkActive="active" (click)="sidenav.toggle()">
-                <div>Home</div>
-            </a>
+    <mat-sidenav-container hasBackdrop="true" class="sidenav-container">
 
-            <a mat-list-item class="nav-item" routerLink="blog/new-post" routerLinkActive="active"
-                (click)="sidenav.toggle()">
-                <div>New Post</div>
-            </a>
+        <mat-sidenav #sidenav mode="side">
+            <mat-nav-list>
+                <a mat-list-item class="nav-item" routerLink="/" routerLinkActive="active" (click)="sidenav.toggle()">
+                    <div>Home</div>
+                </a>
 
-            <a mat-list-item class="nav-item" routerLink="blog/new-blog" routerLinkActive="active"
-                (click)="sidenav.toggle()">
-                <div>New Blog</div>
-            </a>
-        </mat-nav-list>
-    </mat-sidenav>
+                <a mat-list-item class="nav-item" routerLink="blog/new-post" routerLinkActive="active"
+                    (click)="sidenav.toggle()">
+                    <div>New Post</div>
+                </a>
 
-    <router-outlet></router-outlet>
+                <a mat-list-item class="nav-item" routerLink="blog/new-blog" routerLinkActive="active"
+                    (click)="sidenav.toggle()">
+                    <div>New Blog</div>
+                </a>
+            </mat-nav-list>
+        </mat-sidenav>
 
-</mat-sidenav-container>
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+</div>
