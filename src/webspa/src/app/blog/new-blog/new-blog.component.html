@@ -1,19 +1,25 @@
-<form [formGroup]="newBlogForm" (ngSubmit)="onSubmit(newBlogForm.value)">
+<form [formGroup]="newBlogForm" class="full-page-form">
 
-    <div>
-        <label for="blogName">
-            Blog Name
-        </label>
-        <input type="text" formControlName="blogName">
+    <div class="centered-input">
+        <mat-form-field appearance="fill">
+            <mat-label>Blog Name</mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
     </div>
 
-    <div>
-        <label for="tileImage">
-            Tile Image
-        </label>
-        <input type="file" formControlName="tileImage" (change)="onSelectFile($event)">
+
+    <div class="centered-input">
+        <div>
+            <button type="button" mat-raised-button (click)="fileInput.click()">Tile Image</button>
+            <input hidden (change)="onSelectFile($event)" #fileInput type="file" id="file">
+            <span>{{ selectedFile?.name }}</span>
+        </div>
     </div>
 
-    <button type="submit">Create Blog</button>
+    <div class="centered-button">
+        <button mat-raised-button (click)="onSubmit(newBlogForm.value)" type="button">
+            Create Blog
+        </button>
+    </div>
 
 </form>

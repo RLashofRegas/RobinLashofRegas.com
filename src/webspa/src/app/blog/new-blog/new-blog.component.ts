@@ -15,8 +15,8 @@ export class NewBlogComponent implements OnInit {
 
   ngOnInit(): void {
     this.newBlogForm = this.formBuilder.group({
-      blogName: new FormControl(null),
-      tileImage: new FormControl(null)
+      name: new FormControl(''),
+      tileImage: new FormControl('')
     });
   }
 
@@ -24,8 +24,8 @@ export class NewBlogComponent implements OnInit {
   onSubmit(blogData: any): void {
     const submitData: FormData = new FormData();
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    submitData.append('Name', blogData.blogName);
-    submitData.append('TileImage', this.selectedFile);
+    submitData.append('name', blogData.name);
+    submitData.append('tileImage', this.selectedFile);
 
     this.blogService.postBlog(submitData);
     this.newBlogForm.reset();

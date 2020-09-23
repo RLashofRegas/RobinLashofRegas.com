@@ -19,5 +19,35 @@ textarea {
 } 
 
 textarea { 
-  overflow: auto; 
+  overflow: auto;
+  height: 500px;
+}
+
+.centered-input {
+    margin-left: 35%;
+    margin-right: 35%;
+    width: 30%;
+}
+
+.centered-button {
+    margin-left: 45%;
+    margin-right: 45%;
+    width: 10%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+table {
+    width: 100%;
+}
+
+.full-page-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    margin: 0;
 }
