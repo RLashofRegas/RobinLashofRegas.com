@@ -10,3 +10,19 @@ img {
   margin-right: auto;
   width: 90%;
 }
+
+.mat-card-image:first-child {
+  margin-top: 16px;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+
+mat-card img {
+  object-fit: cover; /*this makes the image in src fit to the size specified below*/
+  width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 100%;
+}
+
+mat-card {
+  height: 600px;
+}

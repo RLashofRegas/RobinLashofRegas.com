@@ -1,4 +1,4 @@
-<form [formGroup]="newPostForm">
+<form [formGroup]="newPostForm" class="full-page-form">
 
     <div class="centered-input">
         <mat-form-field appearance="fill">
@@ -36,8 +36,10 @@
         </tr>
     </table>
 
-    <div>
-        <button mat-raised-button (click)="onSubmit(newPostForm.value)" type="button">Add Post</button>
+    <div class="centered-button">
+        <button mat-raised-button (click)="onSubmit(newPostForm.value)" type="button">
+            Add Post
+        </button>
     </div>
 
 </form>
