@@ -22,3 +22,12 @@
   left: 0;
   right: 0;
 }
+
+mat-sidenav {
+  width: 10%;
+}
+
+.nav-item div {
+  width: 100%;
+  text-align: center;
+}
