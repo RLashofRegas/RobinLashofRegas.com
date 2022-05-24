@@ -1,4 +1,4 @@
-FROM node:latest as node-build
+FROM node:14 as node-build
 
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH

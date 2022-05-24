@@ -1,5 +1,5 @@
-# Note: You can use any Debian/Ubuntu based image you want. 
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-buster
+ARG VARIANT=ubuntu-20.04
+FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
@@ -26,8 +26,10 @@ RUN apt-get update \
 
 # CUSTOM
 
-RUN npm install -g @angular/cli \
-    && 
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
+
+RUN npm install -g @angular/cli eslint
 
 # END CUSTOM
 
