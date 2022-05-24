@@ -8,7 +8,7 @@ services:
       - sql-data:/var/lib/mysql
     networks:
       - com.robinlashofregas.network
-  
+
   blogapi:
     image: blogapi:1.0
     build:
@@ -31,7 +31,3 @@ services:
 
 volumes:
   sql-data:
-
-networks:
-  com.robinlashofregas.network:
-    driver: bridge
