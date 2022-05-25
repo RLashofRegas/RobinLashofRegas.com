@@ -31,4 +31,4 @@ services:
 networks:
   com.robinlashofregas.network:
     external:
-      name: com.robinlashofregas.network
+      name: robinlashofregascom_devcontainer_com.robinlashofregas.network
