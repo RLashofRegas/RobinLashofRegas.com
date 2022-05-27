@@ -26,7 +26,7 @@ export class BlogService {
       (options) => {
         const url = options.blogAPIUrl + '/Blogs';
         this.http
-          .get<IBlog[]>(url)
+          .get<IBlog[]>(url, { withCredentials: true }) // TODO: Change this to use interceptor: https://angular.io/guide/http#intercepting-requests-and-responses
           .subscribe(
             (blogs) => {
               for (const blog of blogs) {
@@ -46,7 +46,7 @@ export class BlogService {
       (options) => {
         const url = options.blogAPIUrl + '/Blogs';
         this.http
-          .post(url, blogData)
+          .post(url, blogData, { withCredentials: true })
           .subscribe(
             (blog: IBlog) => {
               postBlogSubject.next(blog);
@@ -63,7 +63,7 @@ export class BlogService {
       (options) => {
         const url = options.blogAPIUrl + '/Posts';
         this.http
-          .get<IPost[]>(url)
+          .get<IPost[]>(url, { withCredentials: true })
           .subscribe(
             (posts) => {
               postsSubject.next(posts);
@@ -80,7 +80,7 @@ export class BlogService {
       (options) => {
         const url = options.blogAPIUrl + '/Posts';
         this.http
-          .post(url, postData)
+          .post(url, postData, { withCredentials: true })
           .subscribe(
             (post: IPost) => {
               addPostSubject.next(post);

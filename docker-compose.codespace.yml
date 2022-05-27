@@ -16,7 +16,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
       - ConnectionString=${BASE_CONNECTION_STRING}Database=Com.RobinLashofRegas.Services.BlogDb;
-      - WebspaUrl=http://localhost:5431
+      - WebspaUrl=https://${CODESPACE_NAME}-5431.githubpreview.dev
       - ImagesPath=/images
     ports:
       - "5432:80"
@@ -25,7 +25,7 @@ services:
 
   webspa:
     environment:
-      - BlogAPIUrl=http://localhost:5432/api/v1
+      - BlogAPIUrl=https://${CODESPACE_NAME}-5432.githubpreview.dev/api/v1
     ports:
       - "5431:4200"
     volumes:

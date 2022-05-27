@@ -6,8 +6,6 @@ services:
     image: mariadb:latest
     volumes:
       - sql-data:/var/lib/mysql
-    networks:
-      - com.robinlashofregas.network
 
   blogapi:
     image: blogapi:1.0
@@ -16,8 +14,6 @@ services:
       dockerfile: src/services/BlogAPI/Dockerfile
     depends_on:
       - sqldb
-    networks:
-      - com.robinlashofregas.network
 
   webspa:
     image: webspa:1.0
@@ -26,8 +22,6 @@ services:
       dockerfile: ./Dockerfile
     depends_on:
       - blogapi
-    networks:
-      - com.robinlashofregas.network
 
 volumes:
   sql-data:
