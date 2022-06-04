@@ -33,6 +33,9 @@ services:
       - '/app/node_modules'
     networks:
       - com.robinlashofregas.network
+    build:
+      args:
+        - ANGULAR_ENVIRONMENT=codespace
 
 networks:
   com.robinlashofregas.network:
