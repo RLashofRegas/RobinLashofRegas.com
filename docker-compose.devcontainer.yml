@@ -3,34 +3,14 @@ version: '3.7'
 services:
 
   sqldb:
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - ACCEPT_EULA=Y
-    ports:
-      - "5433:1433"
     networks:
       - com.robinlashofregas.network
 
   blogapi:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
-      - ConnectionString=${BASE_CONNECTION_STRING}Database=Com.RobinLashofRegas.Services.BlogDb;
-      - WebspaUrl=http://localhost:5431
-      - ImagesPath=/images
-    ports:
-      - "5432:80"
     networks:
       - com.robinlashofregas.network
 
   webspa:
-    environment:
-      - BlogAPIUrl=http://localhost:5432/api/v1
-    ports:
-      - "5431:4200"
-    volumes:
-      - '${LOCAL_WORKSPACE_FOLDER:-.}/src/webspa:/app'
-      - '/app/node_modules'
     networks:
       - com.robinlashofregas.network
 

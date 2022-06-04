@@ -27,10 +27,19 @@ RUN apt-get update \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts/
 
 RUN apt-get update
-RUN apt-get install -y gettext
+RUN apt-get install -y gettext npm
 RUN npm install -g npm@latest-6
 RUN npm install -g @angular/cli@10
-ENV ANGULAR_ENVIRONMENT=codespace
+
+# set to codespace if CODESPACE_NAME is populated, otherwise default
+ENV ANGULAR_ENVIRONMENT=${CODESPACE_NAME:+codespace} 
+ENV ANGULAR_ENVIRONMENT=${ANGULAR_ENVIRONMENT:-default}
+
+# ENV BlogAPIUrl=${CODESPACE_NAME:+https://${CODESPACE_NAME}-5432.githubpreview.dev/api/v1}
+# ENV BlogAPIUrl=${BlogAPIUrl:-http://localhost:5432/api/v1}
+
+ENV WebspaUrl=${CODESPACE_NAME:+https://${CODESPACE_NAME}-5431.githubpreview.dev}
+ENV WebspaUrl=${WebspaUrl:-http://localhost:5431}
 
 # Setting the ENTRYPOINT to docker-init.sh will configure non-root access 
 # to the Docker socket. The script will also execute CMD as needed.

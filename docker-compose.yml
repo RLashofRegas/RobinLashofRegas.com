@@ -4,24 +4,47 @@ services:
 
   sqldb:
     image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - ACCEPT_EULA=Y
     volumes:
       - sql-data:/var/lib/mysql
+    ports:
+      - "5433:1433"
 
   blogapi:
     image: blogapi:1.0
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionString=${BASE_CONNECTION_STRING}Database=Com.RobinLashofRegas.Services.BlogDb;
+      - ImagesPath=/images
+      - WebspaUrl=${WebspaUrl:-http://localhost:5431}
     build:
       context: .
       dockerfile: src/services/BlogAPI/Dockerfile
     depends_on:
       - sqldb
+    volumes:
+      - blog-images:/images
+    ports:
+      - "5432:80"
 
   webspa:
     image: webspa:1.0
     build:
       context: src/webspa
       dockerfile: ./Dockerfile
+      args:
+        - ANGULAR_ENVIRONMENT=${ANGULAR_ENVIRONMENT:-default}
     depends_on:
       - blogapi
+    ports:
+      - "5431:4200"
+    volumes:
+      - '${LOCAL_WORKSPACE_FOLDER:-.}/src/webspa:/app'
+      - '/app/node_modules'
 
 volumes:
   sql-data:
+  blog-images:
