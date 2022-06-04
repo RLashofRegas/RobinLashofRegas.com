@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  blogAPIUrl: 'https://$CODESPACE_NAME.githubpreview.dev/api/v1' // TODO: create this file and URL at build time inside Dockerfile
+  blogAPIUrl: 'https://$CODESPACE_NAME-5432.githubpreview.dev/api/v1' // TODO: create this file and URL at build time inside Dockerfile
 };
 
 /*

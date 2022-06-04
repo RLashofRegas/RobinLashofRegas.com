@@ -7,6 +7,6 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 COPY . ./
-RUN npm run build
+RUN ng build --configuration=${ANGULAR_ENVIRONMENT:-default}
 
 CMD [ "ng", "serve", "--host", "0.0.0.0" ]
