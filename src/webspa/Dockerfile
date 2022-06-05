@@ -1,6 +1,7 @@
 FROM node:14 as node-build
 
-ARG ANGULAR_ENVIRONMENT
+ARG CODESPACE_NAME
+ENV ANGULAR_CODESPACE_ENV=${CODESPACE_NAME:+codespace}
 
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
@@ -10,4 +11,4 @@ RUN npm install
 
 COPY . ./
 
-CMD ng serve --host 0.0.0.0 --configuration=${ANGULAR_ENVIRONMENT:-default}
+CMD ng serve --host 0.0.0.0 --configuration=${ANGULAR_CODESPACE_ENV:-default}

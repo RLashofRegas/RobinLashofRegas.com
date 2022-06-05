@@ -19,10 +19,13 @@ services:
       - ASPNETCORE_URLS=http://+:80
       - ConnectionString=${BASE_CONNECTION_STRING}Database=Com.RobinLashofRegas.Services.BlogDb;
       - ImagesPath=/images
-      - WebspaUrl=${WebspaUrl:-http://localhost:5431}
     build:
       context: .
       dockerfile: src/services/BlogAPI/Dockerfile
+      args:
+        - WebspaCodespaceUrl=https://${CODESPACE_NAME}-5431.githubpreview.dev
+        - WebspaDefaultUrl=http://localhost:5431
+        - CODESPACE_NAME
     depends_on:
       - sqldb
     volumes:
@@ -36,7 +39,8 @@ services:
       context: src/webspa
       dockerfile: ./Dockerfile
       args:
-        - ANGULAR_ENVIRONMENT=${ANGULAR_ENVIRONMENT:-default}
+        - CODESPACE_NAME
+
     depends_on:
       - blogapi
     ports:

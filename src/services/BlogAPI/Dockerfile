@@ -1,6 +1,11 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
 WORKDIR /app
 EXPOSE 80
+ARG CODESPACE_NAME
+ENV WebspaCodespaceUrl=https://${CODESPACE_NAME}-5431.githubpreview.dev
+ENV WebspaDefaultUrl=http://localhost:5431
+ENV WebspaUrl=${CODESPACE_NAME:+WebspaCodespaceUrl}
+ENV WebspaUrl=${WebspaUrl:-WebspaDefaultUrl}
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS dotnet-build
 WORKDIR /build
