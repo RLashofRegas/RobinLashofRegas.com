@@ -25,6 +25,7 @@ obj/
 Obj/
 dist/
 node_modules/
+.angular/
 
 # Visual Studio 2015 cache/options directory
 .vs/
