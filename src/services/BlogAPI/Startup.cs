@@ -35,7 +35,8 @@ namespace BlogAPI
                     .AddPolicy(CorsPolicyName,
                         builder => _ = builder
                             .WithOrigins(this.Configuration["WebspaUrl"])
-                            .WithHeaders(HeaderNames.ContentType)));
+                            .WithHeaders(HeaderNames.ContentType)
+                            .AllowCredentials()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -4,34 +4,51 @@ services:
 
   sqldb:
     image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - ACCEPT_EULA=Y
     volumes:
       - sql-data:/var/lib/mysql
-    networks:
-      - com.robinlashofregas.network
-  
+    ports:
+      - "5433:1433"
+
   blogapi:
     image: blogapi:1.0
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionString=${BASE_CONNECTION_STRING}Database=Com.RobinLashofRegas.Services.BlogDb;
+      - ImagesPath=/images
     build:
       context: .
       dockerfile: src/services/BlogAPI/Dockerfile
+      args:
+        - WebspaCodespaceUrl=https://${CODESPACE_NAME}-5431.githubpreview.dev
+        - WebspaDefaultUrl=http://localhost:5431
+        - CODESPACE_NAME
     depends_on:
       - sqldb
-    networks:
-      - com.robinlashofregas.network
+    volumes:
+      - blog-images:/images
+    ports:
+      - "5432:80"
 
   webspa:
     image: webspa:1.0
     build:
       context: src/webspa
       dockerfile: ./Dockerfile
+      args:
+        - CODESPACE_NAME
+
     depends_on:
       - blogapi
-    networks:
-      - com.robinlashofregas.network
+    ports:
+      - "5431:4200"
+    volumes:
+      - '${LOCAL_WORKSPACE_FOLDER:-.}/src/webspa:/app'
+      - '/app/node_modules'
 
 volumes:
   sql-data:
-
-networks:
-  com.robinlashofregas.network:
-    driver: bridge
+  blog-images:

@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+
+  sqldb:
+    networks:
+      - com.robinlashofregas.network
+
+  blogapi:
+    networks:
+      - com.robinlashofregas.network
+
+  webspa:
+    networks:
+      - com.robinlashofregas.network
+
+networks:
+  com.robinlashofregas.network:
+    name: com.robinlashofregas.network
+    driver: bridge
