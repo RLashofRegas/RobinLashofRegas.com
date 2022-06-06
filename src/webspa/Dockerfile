@@ -11,4 +11,7 @@ RUN npm install
 
 COPY . ./
 
+# https://github.com/webpack/webpack/issues/14532
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
 CMD ng serve --host 0.0.0.0 --configuration=${ANGULAR_CODESPACE_ENV:-default}

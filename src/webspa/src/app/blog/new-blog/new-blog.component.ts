@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { BlogService } from '../blog-services/blog.service';
 
 @Component({
@@ -9,14 +9,14 @@ import { BlogService } from '../blog-services/blog.service';
 })
 export class NewBlogComponent implements OnInit {
   selectedFile: File = null;
-  newBlogForm: UntypedFormGroup;
+  newBlogForm: FormGroup;
 
-  constructor(private formBuilder: UntypedFormBuilder, private blogService: BlogService) { }
+  constructor(private formBuilder: FormBuilder, private blogService: BlogService) { }
 
   ngOnInit(): void {
     this.newBlogForm = this.formBuilder.group({
-      name: new UntypedFormControl(''),
-      tileImage: new UntypedFormControl('')
+      name: new FormControl(''),
+      tileImage: new FormControl('')
     });
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { BlogService } from "../blog-services/blog.service";
 import { IBlog } from "../models/blog.model";
@@ -12,7 +12,7 @@ import { IPost } from "../models/post.model"
 })
 export class NewPostComponent implements OnInit {
   blogs: IBlog[];
-  newPostForm: UntypedFormGroup;
+  newPostForm: FormGroup;
 
   constructor(private blogService: BlogService) { }
 
@@ -25,11 +25,11 @@ export class NewPostComponent implements OnInit {
         }
       );
 
-    this.newPostForm = new UntypedFormGroup({
-      blogId: new UntypedFormControl(''),
-      title: new UntypedFormControl(''),
-      rawContent: new UntypedFormControl(''),
-      parsedContent: new UntypedFormControl('')
+    this.newPostForm = new FormGroup({
+      blogId: new FormControl(''),
+      title: new FormControl(''),
+      rawContent: new FormControl(''),
+      parsedContent: new FormControl('')
     });
   }
 
