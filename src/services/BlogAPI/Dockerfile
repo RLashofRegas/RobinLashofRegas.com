@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
 ARG CODESPACE_NAME
@@ -7,7 +7,7 @@ ENV WebspaDefaultUrl=http://localhost:5431
 ENV WebspaUrl=${CODESPACE_NAME:+${WebspaCodespaceUrl}}
 ENV WebspaUrl=${WebspaUrl:-${WebspaDefaultUrl}}
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS dotnet-build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS dotnet-build
 WORKDIR /build
 COPY /nuget.config /
 COPY /src/services/BlogAPI .

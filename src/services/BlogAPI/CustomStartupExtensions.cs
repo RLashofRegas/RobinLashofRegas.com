@@ -1,3 +1,4 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,7 @@ namespace BlogAPI
             _ = services.AddDbContext<BlogContext>(
                 dbContextOptions => _ = dbContextOptions
                     .UseMySql(configuration["ConnectionString"],
+                        new MySqlServerVersion(new Version(8, 0)),
                         mySqlOptions => _ = mySqlOptions.EnableRetryOnFailure()));
 
             return services;
