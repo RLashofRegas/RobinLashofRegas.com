@@ -47,7 +47,6 @@ services:
       - "5431:4200"
     volumes:
       - '${LOCAL_WORKSPACE_FOLDER:-.}/src/webspa:/app'
-      - '/app/node_modules'
 
 volumes:
   sql-data:
