@@ -28,8 +28,8 @@ RUN apt-get update \
 
 RUN apt-get update
 RUN apt-get install -y gettext npm
-RUN npm install -g npm@latest-6
-RUN npm install -g @angular/cli@10
+RUN npm install -g npm@8
+RUN npm install -g @angular/cli@14
 
 # Setting the ENTRYPOINT to docker-init.sh will configure non-root access 
 # to the Docker socket. The script will also execute CMD as needed.
