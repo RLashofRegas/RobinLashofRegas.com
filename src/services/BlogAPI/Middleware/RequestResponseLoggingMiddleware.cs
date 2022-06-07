@@ -58,7 +58,7 @@ namespace BlogAPI.Middleware
                 headers += $"\tkey: {header.Key}, values: {values}\n";
             }
 
-            string truncatedBody = body.Length > 100 ? body.Substring(0, 100) : body;
+            string truncatedBody = body.Length > 100 ? body[..100] : body;
 
             return $"Headers: {headers}\n type: {context.Request.ContentType}\n scheme: {context.Request.Scheme}\n host+path: {context.Request.Host}{context.Request.Path}\n queryString: {context.Request.QueryString}\n body (first 50 chars): {truncatedBody}";
         }
@@ -95,7 +95,7 @@ namespace BlogAPI.Middleware
                 headers += $"\tkey: {header.Key}, values: {values}\n";
             }
 
-            string truncatedBody = text.Length > 100 ? text.Substring(0, 100) : text;
+            string truncatedBody = text.Length > 100 ? text[..100] : text;
 
             //Return the string for the response, including the status code (e.g. 200, 404, 401, etc.)
             return $"Headers: {headers}\n statusCode: {context.Response.StatusCode}\n responseBody (first 50 chars): {truncatedBody}";
