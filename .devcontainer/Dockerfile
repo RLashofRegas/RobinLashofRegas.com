@@ -27,7 +27,11 @@ RUN apt-get update \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts/
 
 RUN apt-get update
-RUN apt-get install -y gettext npm
+
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+RUN apt-get install -y nodejs
+
+RUN apt-get install -y gettext
 RUN npm install -g npm@8
 RUN npm install -g @angular/cli@14
 
