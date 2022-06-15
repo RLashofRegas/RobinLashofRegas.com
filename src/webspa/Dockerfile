@@ -11,6 +11,8 @@ RUN npm install
 
 COPY . ./
 
+RUN npm prune
+
 # https://github.com/webpack/webpack/issues/14532
 ENV NODE_OPTIONS=--openssl-legacy-provider
 
